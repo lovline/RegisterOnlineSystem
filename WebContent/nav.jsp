@@ -43,9 +43,10 @@
       <ul class="nav navbar-nav navbar-right">
       <c:choose>
       	<c:when test="${is_logged}" >
-      	<li><a href="#">打卡</a></li>
+      	<li><a href="${pageContext.request.contextPath}/checkin/">考勤</a></li>
+      	<li><a href="${pageContext.request.contextPath}/askleave/">请假</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${ username } <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${ userBean.realname } <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="${pageContext.request.contextPath}/profile/">用户中心</a></li>
             <li><a href="${pageContext.request.contextPath}/logout/">退出</a></li>
