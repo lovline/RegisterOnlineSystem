@@ -33,6 +33,7 @@ public class DB {
 	final ResultSet select(String sql){
 		Statement stmt;
 		try {
+			
 			stmt = this.conn.createStatement();
 			return stmt.executeQuery(sql);
 		} catch (SQLException e) {

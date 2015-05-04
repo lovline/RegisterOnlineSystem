@@ -25,6 +25,7 @@ public class UserBean {
 				this.id = rs.getInt("id");
 				this.is_active = rs.getInt("is_active") == 1;
 				this.status = rs.getInt("status");
+				this.email=rs.getString("email");
 				this.realname = rs.getString("realname");
 				this.created_at = rs.getDate("created_at");
 				this.last_login_at = rs.getDate("last_login_at");
@@ -51,6 +52,7 @@ public class UserBean {
 				this.is_active = rs.getInt("is_active") == 1;
 				this.status = rs.getInt("status");
 				this.realname = rs.getString("realname");
+				this.email=rs.getString("email");
 				this.created_at = rs.getDate("created_at");
 				this.last_login_at = rs.getDate("last_login_at");
 				db.close();
