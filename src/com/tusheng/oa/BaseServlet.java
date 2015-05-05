@@ -20,6 +20,8 @@ public class BaseServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
 	public String title = "";
+	public UserBean user = new UserBean();
+	public boolean isLogged = false;
     public BaseServlet() {
         super();
         this.setTitle(Constant.HOMEPAGE);
@@ -33,22 +35,27 @@ public class BaseServlet extends HttpServlet {
     private void checkLogin(HttpServletRequest request){
     	HttpSession session = request.getSession();
     	if (session == null) return;
-    	if (session.getAttribute("is_logged") == null) return;
-    	boolean is_logged = (boolean) session.getAttribute("is_logged");
-    	if (is_logged){
+    	if (session.getAttribute("is_logged") == null) {
+    		this.isLogged = false;
+    		return;
+    	}
+    	this.isLogged = (boolean) session.getAttribute("is_logged");
+    	if (isLogged){
     		// ÒÑ¾­µÇÂ¼
     		if (session.getAttribute("userid") == null){
     			session.removeAttribute("is_logged");
+    			isLogged = false;
     			return;
     		}
     		int uid = (int)session.getAttribute("userid");
-    		UserBean user = new UserBean();
-    		boolean is_succ = user.login(uid);
+    		boolean is_succ = this.user.login(uid);
     		if (is_succ){
     			request.setAttribute("userBean", user);
+    			this.isLogged = true;
     		}
     		else{
     			session.removeAttribute("is_logged");
+    			this.isLogged = false;
     		}
     	}
     }

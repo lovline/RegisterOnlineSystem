@@ -3,6 +3,8 @@ package com.tusheng.oa;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserBean {
@@ -29,6 +31,13 @@ public class UserBean {
 				this.realname = rs.getString("realname");
 				this.created_at = rs.getDate("created_at");
 				this.last_login_at = rs.getDate("last_login_at");
+				
+				Date d = new Date();
+				DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+				String now = format.format(d);
+				String s = "update user set last_login_at=\"" + now + "\" where id=" + this.id;
+				db.update(s);
+				
 				db.close();
 				return true;
 			}

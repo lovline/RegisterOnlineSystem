@@ -18,7 +18,7 @@ public class CheckImp implements CheckInf{
 		
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oa", "root", "123");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oa", "root", "java");
 				ps = conn.prepareStatement("insert into attendance (type) values(?)");
 				ps.setInt(1,chk.getType());
 				ps.executeUpdate();
@@ -44,7 +44,7 @@ public class CheckImp implements CheckInf{
 			
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oa", "root", "123");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oa", "root", "java");
 					ps = conn.prepareStatement("select * from absence where custId=?");
 					ps.setInt(1, id);
 					rs = ps.executeQuery();
@@ -76,7 +76,7 @@ public class CheckImp implements CheckInf{
 		ArrayList list=new ArrayList();
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-			    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oa", "root", "123");
+			    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oa", "root", "java");
 				ps = conn.prepareStatement("select * from attendance ");
 				
 				rs = ps.executeQuery();

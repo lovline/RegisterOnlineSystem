@@ -30,10 +30,9 @@ public class ProfileServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-		HttpSession session = request.getSession();
-    	if (session == null) return;
-		if (session.getAttribute("is_logged") == null || !(boolean)session.getAttribute("is_logged") ) {
+		if (!this.isLogged){
 			response.sendRedirect(request.getContextPath() + "/login/");
+			return;
 		}
 		request.getRequestDispatcher("/profile.jsp").forward(request, response);
 	}
