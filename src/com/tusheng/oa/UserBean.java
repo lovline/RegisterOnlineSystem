@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserBean {
+	private static final int NORMAL = 0;
+	private static final int ADMIN = 1;
 	private int id;
 	private String email;
 	private String password;
@@ -16,7 +18,7 @@ public class UserBean {
 	private String realname;
 	private Date last_login_at;
 	private Date created_at;
-	
+	private boolean admin=false;
 	
 	public boolean login(){
 		DB db = new DB();
@@ -26,11 +28,17 @@ public class UserBean {
 			if (rs.next()){
 				this.id = rs.getInt("id");
 				this.is_active = rs.getInt("is_active") == 1;
+				
+				if (!this.is_active){
+					return false;
+				}
+				
 				this.status = rs.getInt("status");
 				this.email=rs.getString("email");
 				this.realname = rs.getString("realname");
 				this.created_at = rs.getDate("created_at");
 				this.last_login_at = rs.getDate("last_login_at");
+				this.admin = this.status == ADMIN;
 				
 				Date d = new Date();
 				DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
@@ -59,11 +67,15 @@ public class UserBean {
 			if (rs.next()){
 				this.id = rs.getInt("id");
 				this.is_active = rs.getInt("is_active") == 1;
+				if (!this.is_active){
+					return false;
+				}
 				this.status = rs.getInt("status");
 				this.realname = rs.getString("realname");
 				this.email=rs.getString("email");
 				this.created_at = rs.getDate("created_at");
 				this.last_login_at = rs.getDate("last_login_at");
+				this.admin = this.status == ADMIN;
 				db.close();
 				return true;
 			}
@@ -126,6 +138,13 @@ public class UserBean {
 	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
 	}
-	
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 	
 }

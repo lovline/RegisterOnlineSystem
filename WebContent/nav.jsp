@@ -45,10 +45,23 @@
       	<c:when test="${is_logged}" >
       	<li><a href="${pageContext.request.contextPath}/checkin/">考勤</a></li>
       	<li><a href="${pageContext.request.contextPath}/askleave/">请假</a></li>
+        <c:if test="${ userBean.admin }" >
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 管理 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="${pageContext.request.contextPath}/manage/leave/">考勤管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/manage/absence/">请假管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/manage/user/">员工管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/manage/work/">工作管理</a></li>
+          </ul>
+        </li>
+        </c:if>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${ userBean.realname } <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="${pageContext.request.contextPath}/profile/">用户中心</a></li>
+            <li><a href="${pageContext.request.contextPath}/mywork/">我的工作</a></li>
+            <li><a href="${pageContext.request.contextPath}/mynote/">我的记事本</a></li>
             <li><a href="${pageContext.request.contextPath}/logout/">退出</a></li>
           </ul>
         </li>
