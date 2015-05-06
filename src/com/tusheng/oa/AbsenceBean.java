@@ -3,6 +3,9 @@ package com.tusheng.oa;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AbsenceBean {
@@ -12,8 +15,43 @@ public class AbsenceBean {
 	private Date end_time;
 	private int status;
     private Date created_at ;
-
-// setter and getter
+   
+    public boolean absencein(int uid,String start_time,String end_time, int status) {
+		DB db = new DB();
+		Date d = new Date();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String now = format.format(d);
+		String s = "insert into absence set user_id =\"" + uid + "\", start_time= \"" + start_time + "\",end_time=\"" + end_time +"\",status=\"" +status + "\",created_at =\"" + now + "\"";
+		db.insert(s);
+		db.close();
+		return true;
+	}
+    public ArrayList<AbsenceBean> absenceout(int uid) {
+		DB db = new DB();		
+//		UserBean user = new UserBean(); 	
+		ArrayList<AbsenceBean> result = new ArrayList<AbsenceBean>();
+		try {
+			String s = "select created_at,start_time,end_time,status from absence where user_id=" + uid;
+			ResultSet rs = db.select(s);
+			while(rs.next()){
+				AbsenceBean bean = new AbsenceBean();
+				bean.created_at = rs.getDate("created_at");
+				bean.start_time = rs.getDate("start_time");
+				bean.end_time = rs.getDate("end_time");
+				bean.status = rs.getInt("status");
+				result.add(bean);
+			}
+			db.close();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			db.close();
+			return result;
+		}
+    }
+    
+//  setter and getter
 	public int getId() {
 		return id;
 	}
