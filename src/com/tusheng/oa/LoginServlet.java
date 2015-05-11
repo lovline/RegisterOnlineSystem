@@ -1,6 +1,7 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,6 +58,9 @@ public class LoginServlet extends BaseServlet {
 		else{
 			response.sendRedirect(request.getContextPath() + "/register/");
 		}
+//		ArrayList<Checko> results = bean.ckuser(this.user.getId());
+//	    request.setAttribute("results", results);
+
 	}
 
 }

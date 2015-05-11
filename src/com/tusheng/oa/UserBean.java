@@ -1,10 +1,13 @@
 package com.tusheng.oa;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UserBean {
@@ -19,6 +22,15 @@ public class UserBean {
 	private Date last_login_at;
 	private Date created_at;
 	private boolean admin=false;
+	public void registerxx(String email,String realname,String password){
+		DB db = new DB();
+		
+		String sql = "insert into user set email=\"" + email + "\",realname=\"" + realname + 
+				"\", password=\""+password + "\",is_active=true,status=0";
+		
+		db.insert(sql);
+		db.close();
+	}
 	
 	public boolean login(){
 		DB db = new DB();
@@ -88,6 +100,9 @@ public class UserBean {
 			return false;
 		}
 	}
+	
+	//2-2
+
 	
 	// setter and getter
 	public int getId() {
