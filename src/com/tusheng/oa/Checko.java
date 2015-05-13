@@ -24,22 +24,17 @@ public class Checko {
 	private String name;
 	private int wid;
 
-	public boolean check(String detail,String checkb) {
+	public boolean check(String detail) {
 
 		DB db = new DB();
 		Date d = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = format.format(d);
 		String sq = "insert into work set detail=\"" + detail + "\",status=0"
-				+ ",deadline=\"" + now + "\",assigner_id=2";
+				+ ",deadline=\"" + now + "\",assigner_id=1";
 		db.insert(sq);
 
-		// Date d = new Date();
-		// DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		// String now = format.format(d);
-		// String s = "update work set deadline=\"" + now + "\" where id="
-		// + this.id;
-		// db.update(s);
+
 
 		db.close();
 		return true;
@@ -132,7 +127,7 @@ public class Checko {
 				co.status = rs.getInt("status");
 				checks.add(co);
 			}
-		} catch (SQLException e) {
+		} catch(SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

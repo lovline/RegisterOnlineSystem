@@ -61,11 +61,10 @@ public class CheckOneServlet extends BaseServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String detail = request.getParameter("tet");
-		String detail2 = request.getParameter("tet2");
 	
 		Checko co = new Checko();
 		
-		co.check(detail,detail2);
+		co.check(detail);
 
 		response.sendRedirect(request.getContextPath() + "/work/");
 	}
