@@ -18,17 +18,16 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/checkin/")
-public class CheckInServlet extends BaseServlet {
+@WebServlet("/work/")
+public class CheckOneServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CheckInServlet() {
+	public CheckOneServlet() {
 		super();
-        this.setTitle("考勤");
+		this.setTitle("查看工作");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,14 +39,17 @@ public class CheckInServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-		if (!this.isLogged){
+		if (!this.isLogged) {
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
-		Check chk = new Check();
-		ArrayList<Check> list=chk.chek();
-		request.setAttribute("custList", list);
-		request.getRequestDispatcher("/checkin.jsp").forward(request, response);
+		response.setCharacterEncoding("UTF-8");
+
+		Checko co = new Checko();
+		ArrayList<Checko> cc = co.ckuser();
+		request.setAttribute("cc", cc);
+
+		request.getRequestDispatcher("/work.jsp").forward(request, response);
 	}
 
 	/**
@@ -57,19 +59,15 @@ public class CheckInServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//1.
+		request.setCharacterEncoding("UTF-8");
+		String detail = request.getParameter("tet");
+		String detail2 = request.getParameter("tet2");
+	
+		Checko co = new Checko();
 		
-		
-		int type = (Integer.parseInt(request.getParameter("type")));
-		HttpSession session=request.getSession();
-		int uid=(int)session.getAttribute("userid");
-		Check chk = new Check();
-		chk.check(type, uid);
+		co.check(detail,detail2);
 
-		
-		
-		response.sendRedirect(request.getContextPath() + "/checkin/");
-		
+		response.sendRedirect(request.getContextPath() + "/work/");
 	}
 
 }

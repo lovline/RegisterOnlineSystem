@@ -18,17 +18,16 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/checkin/")
-public class CheckInServlet extends BaseServlet {
+@WebServlet("/myworktow/")
+public class MyworktowServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CheckInServlet() {
+	public MyworktowServlet() {
 		super();
-        this.setTitle("考勤");
+		this.setTitle("查看任务");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,14 +39,17 @@ public class CheckInServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-		if (!this.isLogged){
+		if (!this.isLogged) {
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
-		Check chk = new Check();
-		ArrayList<Check> list=chk.chek();
-		request.setAttribute("custList", list);
-		request.getRequestDispatcher("/checkin.jsp").forward(request, response);
+		Checko co = new Checko();
+		ArrayList<Checko> cc = co.ckuser();
+		response.setCharacterEncoding("UTF-8");
+		request.setAttribute("cc", cc);
+		
+
+		request.getRequestDispatcher("/myworktow.jsp").forward(request, response);
 	}
 
 	/**
@@ -57,19 +59,11 @@ public class CheckInServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//1.
-		
-		
-		int type = (Integer.parseInt(request.getParameter("type")));
-		HttpSession session=request.getSession();
-		int uid=(int)session.getAttribute("userid");
-		Check chk = new Check();
-		chk.check(type, uid);
-
-		
-		
-		response.sendRedirect(request.getContextPath() + "/checkin/");
-		
+		request.setCharacterEncoding("UTF-8");
+		int jid = Integer.parseInt(request.getParameter("work.number"));
+		Checko co = new Checko();
+		co.setmywork(jid);
+		response.sendRedirect(request.getContextPath() + "/myworktow/");
 	}
 
 }
