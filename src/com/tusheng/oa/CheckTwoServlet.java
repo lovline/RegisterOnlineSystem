@@ -18,17 +18,16 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/checkin/")
-public class CheckInServlet extends BaseServlet {
+@WebServlet("/worktwo/")
+public class CheckTwoServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CheckInServlet() {
+	public CheckTwoServlet() {
 		super();
-        this.setTitle("考勤");
+		this.setTitle("查看工作");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,14 +39,19 @@ public class CheckInServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-		if (!this.isLogged){
+		if (!this.isLogged) {
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
-		Check chk = new Check();
-		ArrayList<Check> list=chk.chek();
-		request.setAttribute("custList", list);
-		request.getRequestDispatcher("/checkin.jsp").forward(request, response);
+		response.setCharacterEncoding("UTF-8");
+
+		Checko co = new Checko();
+		ArrayList<Checko> cc = co.ckuser();
+		ArrayList<UserBean> employees = UserBean.get_employees();
+		request.setAttribute("cc", cc);
+		request.setAttribute("cu", employees);
+
+		request.getRequestDispatcher("/worktwo.jsp").forward(request, response);
 	}
 
 	/**
@@ -57,19 +61,14 @@ public class CheckInServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//1.
-		
-		
-		int type = (Integer.parseInt(request.getParameter("type")));
-		HttpSession session=request.getSession();
-		int uid=(int)session.getAttribute("userid");
-		Check chk = new Check();
-		chk.check(type, uid);
+		request.setCharacterEncoding("UTF-8");
+	
+		int sw = Integer.parseInt(request.getParameter("worknum"));
+		int uuid = Integer.parseInt(request.getParameter("custId"));
+		Checko co = new Checko();
+		co.setwork(sw,uuid);
 
-		
-		
-		response.sendRedirect(request.getContextPath() + "/checkin/");
-		
+		response.sendRedirect(request.getContextPath() + "/worktwo/");
 	}
 
 }

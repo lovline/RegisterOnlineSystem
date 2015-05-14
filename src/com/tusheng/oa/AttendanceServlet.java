@@ -1,11 +1,6 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,17 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class AttendanceServlet
  */
-@WebServlet("/register/")
-public class RegisterServlet extends BaseServlet {
+@WebServlet("/AttendanceServlet")
+public class AttendanceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public AttendanceServlet() {
         super();
-        this.setTitle("зЂВс");
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -31,8 +27,6 @@ public class RegisterServlet extends BaseServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doGet(request, response);
-		request.getRequestDispatcher("/register.jsp").forward(request, response);
 	}
 
 	/**
@@ -40,21 +34,6 @@ public class RegisterServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setCharacterEncoding("UTF-8");
-		String realname = request.getParameter("realname");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		
-			UserBean bb=new UserBean();
-			bb.registerxx(email,realname,password);
-		
-		
-		String url = request.getContextPath() + "/login/";
-		response.sendRedirect(url);
-
-	}
-		
-		
 	}
 
-
+}
