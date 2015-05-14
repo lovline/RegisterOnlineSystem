@@ -7,19 +7,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class DetailServlet
  */
-@WebServlet("/logout/")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/note/detail/")
+public class DetailServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public DetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,10 +28,21 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		session.removeAttribute("is_logged");
-		session.removeAttribute("userid");
-		response.sendRedirect(request.getContextPath() + "/index/");
+		super.doGet(request, response);
+		if (!this.isLogged) {
+			response.sendRedirect(request.getContextPath() + "/login/");
+			return;
+		}
+		
+		String id=request.getParameter("id");
+		int is=Integer.parseInt(id);
+		NoteBean aa=new NoteBean();
+		aa.detailnote(is);
+//		NoteBean note=new NoteBean();
+		request.setAttribute("note",aa);
+		//request.setAttribute("content", aa.getContent());
+		//request.setAttribute("is_public", "is_public");
+		request.getRequestDispatcher("/detail.jsp").forward(request, response);
 	}
 
 	/**

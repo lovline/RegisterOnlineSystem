@@ -1,25 +1,25 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class mynoteServlet
  */
-@WebServlet("/logout/")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/mynote/")
+public class mynoteServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public mynoteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,10 +29,17 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		session.removeAttribute("is_logged");
-		session.removeAttribute("userid");
-		response.sendRedirect(request.getContextPath() + "/index/");
+		super.doGet(request, response);
+		if (!this.isLogged) {
+			response.sendRedirect(request.getContextPath() + "/login/");
+			return;
+		}
+		 ArrayList<NoteBean> notes = NoteBean.getnotes(this.user.getId());
+		 request.setAttribute("notes", notes);
+		 boolean is_public=true;
+		 ArrayList<NoteBean> notess = NoteBean.getallnotes(is_public);
+		 request.setAttribute("notess", notess);
+		request.getRequestDispatcher("/mynote.jsp").forward(request, response);
 	}
 
 	/**

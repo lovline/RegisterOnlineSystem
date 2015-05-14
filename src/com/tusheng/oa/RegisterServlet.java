@@ -18,11 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/register/")
 public class RegisterServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";  
-    static final String DB_URL="jdbc:mysql://localhost/oa";
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "java";  
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,17 +44,10 @@ public class RegisterServlet extends BaseServlet {
 		String realname = request.getParameter("realname");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		try {
-			Class.forName(JDBC_DRIVER).newInstance();
-			Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			String sql = "insert into user set email=\"" + email + "\",realname=\"" + realname + 
-					"\", password=\""+password + "\"";
-			Statement stmt = conn.createStatement();
-			stmt.execute(sql);
-		} catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+			UserBean bb=new UserBean();
+			bb.registerxx(email,realname,password);
+		
 		
 		String url = request.getContextPath() + "/login/";
 		response.sendRedirect(url);

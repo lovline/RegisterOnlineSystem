@@ -59,7 +59,6 @@ public class BaseServlet extends HttpServlet {
     		}
     	}
     }
-    
     public void setTitle(String s){
     	this.title = s + "-" + Constant.SITE_NAME;
     }
