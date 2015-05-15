@@ -2,6 +2,7 @@ package com.tusheng.oa;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -60,6 +61,9 @@ public class LoginServlet extends BaseServlet {
 			String info = URLEncoder.encode("µÇÂ¼Ê§°Ü£¬Çë×¢²á", "utf-8");
 			response.sendRedirect(request.getContextPath() + "/register/?alert="+info);
 		}
+//		ArrayList<Checko> results = bean.ckuser(this.user.getId());
+//	    request.setAttribute("results", results);
+
 	}
 
 }

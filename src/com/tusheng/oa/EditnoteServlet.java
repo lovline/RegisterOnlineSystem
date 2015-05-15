@@ -40,6 +40,9 @@ public class EditnoteServlet extends BaseServlet {
 	//	HttpSession session = request.getSession();
 	//	session.getAttribute("userid");
 		String id=request.getParameter("id");
+		if (id == null){
+			
+		}
 		int ia=Integer.parseInt(id);
 		NoteBean as=new NoteBean();
 	     as.detailnote(ia);
@@ -52,12 +55,23 @@ public class EditnoteServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int id=Integer.parseInt(request.getParameter("id"));
+		String nid = request.getParameter("id");
+		
 		String subject1=request.getParameter("subject");
 		String content1=request.getParameter("content");
-		boolean is_public1=request.getParameter("is_public") == "on";
+		String is_public2=request.getParameter("is_public");
+		if (nid == null || subject1 == null || content1 == null){
+			// 
+		}
+		
+		boolean is_public1=is_public2.equals("on");
+		int id=Integer.parseInt(nid);
+		
+		System.out.println( is_public2);
+		System.out.println( subject1);
+		System.out.println( is_public1);
 		NoteBean ff=new NoteBean();
-		ff.updatenote(id, subject1, content1, is_public1);
+		ff.updatenote(id, subject1, content1,is_public1);
 		String url = request.getContextPath() + "/mynote/";
 		response.sendRedirect(url);
 		

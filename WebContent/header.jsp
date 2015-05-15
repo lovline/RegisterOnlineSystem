@@ -17,11 +17,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/owl-carousel/owl.carousel.css"></link>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/owl-carousel/owl.theme.css"></link>
 
+
 </head>
 <body>
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
+
 	
 
 

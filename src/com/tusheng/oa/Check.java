@@ -19,7 +19,11 @@ public class Check {
 		System.out.println(type + "***" + uid);
 		DB db = new DB();
 		String sq = "insert into attendance set type=" + type + " ,user_id="
+<<<<<<< HEAD
+				+ uid;
+=======
 				+ uid+",id="+id;
+>>>>>>> 18fa01b6b62788e793f99385473f2dae5c2cf572
 		db.insert(sq);
 
 		Date d = new Date();
@@ -33,6 +37,16 @@ public class Check {
 		return true;
 	}
 
+<<<<<<< HEAD
+	public ArrayList<Check> chek(int pid) {
+		DB db = new DB();
+		String sql = "select * from attendance where user_id="+pid;
+		ResultSet rs = db.select(sql);
+		ArrayList<Check> list=new ArrayList<Check>();	
+			try {
+				while (rs.next()) {
+					Check ck=new Check();
+=======
 	public ArrayList<Check> chek() {
 		DB db = new DB();
 		String sql = "select * from attendance";
@@ -42,6 +56,7 @@ public class Check {
 		
 			try {
 				while (rs.next()) {
+>>>>>>> 18fa01b6b62788e793f99385473f2dae5c2cf572
 					ck.id = rs.getInt("id");
 					ck.checkin_time=rs.getTimestamp("checkin_time");
 					ck.type=rs.getInt("type");
@@ -92,9 +107,12 @@ public class Check {
 		super();
 	}
 
+<<<<<<< HEAD
+=======
 	public void setCheckin_time(String checkin_time2) {
 		// TODO Auto-generated method stub
 
 	}
+>>>>>>> 18fa01b6b62788e793f99385473f2dae5c2cf572
 
 }
