@@ -31,7 +31,11 @@ public class Checko {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = format.format(d);
 		String sq = "insert into work set detail=\"" + detail + "\",status=0"
+<<<<<<< HEAD
 				+ ",deadline=\"" + now + "\",assigner_id=2";
+=======
+				+ ",deadline=\"" + now + "\",assigner_id=1";
+>>>>>>> 18fa01b6b62788e793f99385473f2dae5c2cf572
 		db.insert(sq);
 
 

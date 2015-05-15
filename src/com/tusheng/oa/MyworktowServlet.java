@@ -47,8 +47,14 @@ public class MyworktowServlet extends BaseServlet {
 		ArrayList<Checko> cc = co.ckuser();
 		response.setCharacterEncoding("UTF-8");
 		request.setAttribute("cc", cc);
+<<<<<<< HEAD
 		request.getRequestDispatcher("/myworktow.jsp").forward(request,
 				response);
+=======
+		
+
+		request.getRequestDispatcher("/myworktow.jsp").forward(request, response);
+>>>>>>> 18fa01b6b62788e793f99385473f2dae5c2cf572
 	}
 
 	/**

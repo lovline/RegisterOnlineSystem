@@ -85,6 +85,7 @@ public class UserBean {
 				this.status = rs.getInt("status");
 				this.realname = rs.getString("realname");
 				this.email=rs.getString("email");
+				this.id=rs.getInt("id");
 				this.created_at = rs.getDate("created_at");
 				this.last_login_at = rs.getDate("last_login_at");
 				this.admin = this.status == ADMIN;
