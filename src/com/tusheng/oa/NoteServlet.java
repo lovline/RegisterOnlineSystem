@@ -45,7 +45,8 @@ public class NoteServlet extends BaseServlet {
 		
 		String subject1=request.getParameter("subject");
 		String content1=request.getParameter("content");
-		boolean is_public1=request.getParameter("is_public") == "on";
+		String is_public2=request.getParameter("is_public");
+		boolean is_public1=is_public2.equals("on");
 		NoteBean ff=new NoteBean();
 		ff.creatnote(this.user.getId(), subject1, content1, is_public1);
 		String url = request.getContextPath() + "/mynote/";
