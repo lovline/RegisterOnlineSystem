@@ -18,14 +18,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/work/")
-public class CheckOneServlet extends BaseServlet {
+@WebServlet("/workthree/")
+public class CheckThreeServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CheckOneServlet() {
+	public CheckThreeServlet() {
 		super();
 		this.setTitle("查看工作");
 		// TODO Auto-generated constructor stub
@@ -49,7 +49,7 @@ public class CheckOneServlet extends BaseServlet {
 		ArrayList<Checko> cc = co.ckuser();
 		request.setAttribute("cc", cc);
 
-		request.getRequestDispatcher("/work.jsp").forward(request, response);
+		request.getRequestDispatcher("/workthree.jsp").forward(request, response);
 	}
 
 	/**
@@ -60,11 +60,11 @@ public class CheckOneServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String detail = request.getParameter("tet");
-		Checko co = new Checko();	
-		co.check(detail);
+		int gid = Integer.parseInt(request.getParameter("worknum2"));
+		Checko co = new Checko();
+		co.gbmywork(gid);
 
-		response.sendRedirect(request.getContextPath() + "/work/");
+		response.sendRedirect(request.getContextPath() + "/workthree/");
 	}
 
 }

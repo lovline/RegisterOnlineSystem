@@ -45,9 +45,11 @@ public class RegisterServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setCharacterEncoding("UTF-8");
 		String realname = request.getParameter("realname");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+
 		
 			UserBean bb=new UserBean();
 			bb.registerxx(email,realname,password);

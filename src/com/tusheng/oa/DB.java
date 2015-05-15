@@ -10,7 +10,7 @@ public class DB {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String DB_URL = "jdbc:mysql://localhost/oa";
 	private static final String DB_USER = "root";
-	private static final String DB_PASS = "123";
+	private static final String DB_PASS = "java";
 	private Connection conn;
 
 	public DB(){

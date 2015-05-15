@@ -44,10 +44,11 @@ public class MyworkServlet extends BaseServlet {
 			return;
 		}
 		Checko co = new Checko();
-		ArrayList<Checko> cc = co.ckuser();
+
+		int pid=this.user.getId();
+		ArrayList<Checko> cc =co.pkuser(pid);
 		response.setCharacterEncoding("UTF-8");
 		request.setAttribute("cc", cc);
-		
 
 		request.getRequestDispatcher("/mywork.jsp").forward(request, response);
 	}
@@ -62,13 +63,10 @@ public class MyworkServlet extends BaseServlet {
 		request.setCharacterEncoding("UTF-8");
 		int st = Integer.parseInt(request.getParameter("custId"));
 		int cid = Integer.parseInt(request.getParameter("workid"));
-
-		
-		HttpSession session=request.getSession();
-		int uid=(int)session.getAttribute("userid");
 		Checko co = new Checko();
-
-		co.stcheck(st,uid,cid);
+		co.stcheck(st,cid);
+		int pid=this.user.getId();
+		co.pkuser(pid);
 		
 		response.sendRedirect(request.getContextPath() + "/mywork/");
 	}

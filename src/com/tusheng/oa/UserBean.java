@@ -161,5 +161,33 @@ public class UserBean {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
+
+	public static ArrayList<UserBean> get_employees() {
+		// TODO Auto-generated method stub
+		DB db = new DB();
+		ArrayList<UserBean> list = new ArrayList<UserBean>();
+		
+		String s = "select * from user";
+		ResultSet rs = db.select(s);
+		try {
+			while (rs.next()) {
+				UserBean bean=new UserBean();
+				bean.id = rs.getInt("id");
+				bean.realname = rs.getString("realname");
+				list.add(bean);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		db.close();
+		return list;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getRealname() + "(" + this.getId() + ")";
+	}
 	
 }

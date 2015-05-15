@@ -22,6 +22,7 @@ public class Checko {
 	private Date finish_at;
 	private int status; /* 0: 正常， 1：已经接受 2: 拒绝 3：完成待验收 4：关闭 */
 	private String name;
+	private int wid;
 
 	public boolean check(String detail) {
 
@@ -30,30 +31,40 @@ public class Checko {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = format.format(d);
 		String sq = "insert into work set detail=\"" + detail + "\",status=0"
-				+ ",deadline=\"" + now + "\"";
+				+ ",deadline=\"" + now + "\",assigner_id=2";
 		db.insert(sq);
 
-		// Date d = new Date();
-		// DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		// String now = format.format(d);
-		// String s = "update work set deadline=\"" + now + "\" where id="
-		// + this.id;
-		// db.update(s);
+
 
 		db.close();
 		return true;
 	}
 
 	// 分配工作人
-	public boolean setwork(int usid) {
+	public boolean setwork(int sw,int uuid) {
 		DB db = new DB();
-
-		String sq = "update work set assignee_id=" + usid + " where id=" + id;
+		String sq = "update work set assignee_id=" + uuid + " where id=" + sw;
 		db.update(sq);
 
 		return true;
 	}
+	
+	//完成工作
+	public boolean setmywork(int jid) {
+		DB db = new DB();
+		String sq = "update work set status=3" + " where id=" + jid;
+		db.update(sq);
 
+		return true;
+	}
+	//关闭工作
+	public boolean gbmywork(int gid) {
+		DB db = new DB();
+		String sq = "update work set status=4" + " where id=" + gid;
+		db.update(sq);
+		return true;
+	}
+	
 	public String nameselec(int u) {
 		DB db = new DB();
 		String realname = null;
@@ -91,7 +102,7 @@ public class Checko {
 				co.status = rs.getInt("status");
 				co.assignee_id = rs.getInt("assignee_id");
 				checks.add(co);
-			}System.out.println(name);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,14 +112,67 @@ public class Checko {
 		return checks;
 	}
 
+	//普通用户查寻
+	public ArrayList<Checko> pkuser(int pid) {
+		DB db = new DB();
+		String sql = "select * from work where assignee_id="+pid;
+		ResultSet rs = db.select(sql);
+		ArrayList<Checko> checks = new ArrayList<Checko>();
+		try {
+			while (rs.next()) {
+				Checko co = new Checko();
+				co.id = rs.getInt("id");
+				co.detail = rs.getString("detail");
+				co.deadline = rs.getTimestamp("deadline");
+				co.status = rs.getInt("status");
+				checks.add(co);
+			}
+		} catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		db.close();
+		return checks;
+	}
+	
 	// 修改任务状态
-	public boolean stcheck(int st, int uid, int cid) {
+	public boolean stcheck(int st,int cid) {
 		DB db = new DB();
 		String st2 = "update work set status=" + st + " where id=" + cid;
 		db.update(st2);
 
 		db.close();
 		return true;
+	}
+	
+	//
+	public ArrayList<Checko> wkuser(int uid) {
+		DB db = new DB();
+		String sql = "select * from work";
+		ResultSet rs = db.select(sql);
+		ArrayList<Checko> checks = new ArrayList<Checko>();
+		Checko cbean = new Checko();
+		ArrayList<Integer> userid = cbean.assid();
+		int i = 0;
+		try {
+			while (rs.next()) {
+				Checko co = new Checko();
+				co.id = rs.getInt("id");
+				co.name = co.nameselec(userid.get(i++));
+				co.detail = rs.getString("detail");
+				co.deadline = rs.getTimestamp("deadline");
+				co.status = rs.getInt("status");
+				co.assignee_id = rs.getInt("assignee_id");
+				checks.add(co);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		db.close();
+		return checks;
 	}
 
 	// 查寻用户Id
@@ -128,10 +192,11 @@ public class Checko {
 			e.printStackTrace();
 		}
 		db.close();
-		System.out.println(relist);
 		return relist;
 	}
 
+	//user中id
+	
 	//
 
 	public int getId() {
@@ -228,6 +293,14 @@ public class Checko {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getWid() {
+		return wid;
+	}
+
+	public void setWid(int wid) {
+		this.wid = wid;
 	}
 
 }

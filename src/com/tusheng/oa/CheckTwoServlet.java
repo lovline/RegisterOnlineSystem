@@ -18,14 +18,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/work/")
-public class CheckOneServlet extends BaseServlet {
+@WebServlet("/worktwo/")
+public class CheckTwoServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CheckOneServlet() {
+	public CheckTwoServlet() {
 		super();
 		this.setTitle("查看工作");
 		// TODO Auto-generated constructor stub
@@ -47,9 +47,11 @@ public class CheckOneServlet extends BaseServlet {
 
 		Checko co = new Checko();
 		ArrayList<Checko> cc = co.ckuser();
+		ArrayList<UserBean> employees = UserBean.get_employees();
 		request.setAttribute("cc", cc);
+		request.setAttribute("cu", employees);
 
-		request.getRequestDispatcher("/work.jsp").forward(request, response);
+		request.getRequestDispatcher("/worktwo.jsp").forward(request, response);
 	}
 
 	/**
@@ -60,11 +62,13 @@ public class CheckOneServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String detail = request.getParameter("tet");
-		Checko co = new Checko();	
-		co.check(detail);
+	
+		int sw = Integer.parseInt(request.getParameter("worknum"));
+		int uuid = Integer.parseInt(request.getParameter("custId"));
+		Checko co = new Checko();
+		co.setwork(sw,uuid);
 
-		response.sendRedirect(request.getContextPath() + "/work/");
+		response.sendRedirect(request.getContextPath() + "/worktwo/");
 	}
 
 }
