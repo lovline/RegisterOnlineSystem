@@ -68,9 +68,6 @@ public class CheckInServlet extends BaseServlet {
 		Check chk = new Check();
 		chk.check(type, uid);
 		chk.chek(pid);
-
-		
-		
 		response.sendRedirect(request.getContextPath() + "/checkin/");
 		
 	}

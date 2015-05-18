@@ -6,6 +6,7 @@
 <div style="width: 600; float: right">
 	<br /> <br /> <br />
 	<a class="btn btn-primary btn-xs"
+
 		href="${pageContext.request.contextPath}/work/"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新增&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
 		class="btn btn-primary btn-xs"
 		href="${pageContext.request.contextPath}/worktwo/"><b>查看分配</b></a>
@@ -31,6 +32,8 @@
 						<td width="200">${ch.deadline}</td>
 									<td>${ch.assignee.realname}</td>
 						<td>${ch.detail}</td>
+
+
 						<td width="200"><c:if test="${ch.status==4}">完成</c:if> <c:if
 								test="${ch.status==1}">已经接受</c:if> <c:if test="${ch.status==2}">拒绝</c:if>
 							<c:if test="${ch.status==3}">

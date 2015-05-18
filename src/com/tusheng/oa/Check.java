@@ -17,7 +17,7 @@ public class Check {
 
 	public boolean check(int type, int uid) {
 		// ResultSet rs =
-		DB db = new DB();		
+		DB db = new DB();
 		Date d = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = format.format(d);
@@ -42,7 +42,6 @@ public class Check {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
 		}
 		db.close();
 		return realname;
@@ -67,8 +66,9 @@ public class Check {
 	}
 	public ArrayList<Check> chekin() {
 		DB db = new DB();
-		String sql = "select * from attendance";
+		String sql = "select * from attendance ";
 		ResultSet rs = db.select(sql);
+
 		ArrayList<Check> list=new ArrayList<Check>();
 		Check cbean=new Check();
 		ArrayList<Integer> userid = cbean.assid();	
@@ -150,12 +150,12 @@ public class Check {
 	public Check() {
 		super();
 	}
+
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 }

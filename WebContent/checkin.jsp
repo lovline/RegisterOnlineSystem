@@ -38,6 +38,7 @@
 	var timer = setInterval("setTimes()");
 </script>
 <table class="table table-bordered">
+
 	<tr class="success">
 		<th>时间</th>
 		<th>上班</th>
@@ -47,11 +48,13 @@
 	<form action=" " method="post">
 		<tr class="active">
 			<td><div id="time">&nbsp;</div></td>
-			<td><input type="radio" name="type" value="2"  class="btn btn-info"/></td>
-			<td><input type="radio" name="type" value="1"  class="btn btn-info"/></td>
+			<td><input type="radio" name="type" value="2"
+				class="btn btn-info" /></td>
+			<td><input type="radio" name="type" value="1"
+				class="btn btn-info" /></td>
 			<td><input type="submit" value="提交" class="btn btn-warning" /></td>
 		</tr>
 	</form>
 </table>
-
+</center>
 <%@ include file="footer.jsp"%>

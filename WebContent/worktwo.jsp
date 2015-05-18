@@ -3,14 +3,16 @@
 <%@ include file="../header.jsp"%>
 <%@ include file="../nav.jsp"%>
 	<b>分配工作</b>
-<div style="width: 600; float:right">
-<br /> <br /> <br /><a
+<div style="width: 600; float: right">
+	<br /> <br /> <br />
+	<a
 		class="btn btn-primary btn-xs"
 		href="${pageContext.request.contextPath}/work/"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新增&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
 		class="btn btn-primary btn-xs"
 		href="${pageContext.request.contextPath}/workthree/"><b>完成任务</b></a>
 </div>
 <center>
+
 
 	<table class="table table-bordered">
 		<tr class="bg-primary">
@@ -48,7 +50,6 @@
 						<td width="200">已分配————${ch.name}</td>
 					</tr>
 			</c:if>
-
 		</c:forEach>
 	</table>
 </center>

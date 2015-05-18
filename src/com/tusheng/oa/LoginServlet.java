@@ -1,6 +1,7 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -54,10 +55,12 @@ public class LoginServlet extends BaseServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("is_logged", true);
 			session.setAttribute("userid", bean.getId());
-			response.sendRedirect(request.getContextPath() + "/index/");
+			String info = URLEncoder.encode("µÇÂ¼³É¹¦", "utf-8");
+			response.sendRedirect(request.getContextPath() + "/index/?alert="+info);
 		}
 		else{
-			response.sendRedirect(request.getContextPath() + "/register/");
+			String info = URLEncoder.encode("µÇÂ¼Ê§°Ü£¬Çë×¢²á", "utf-8");
+			response.sendRedirect(request.getContextPath() + "/register/?alert="+info);
 		}
 
 //		ArrayList<Checko> results = bean.ckuser(this.user.getId());

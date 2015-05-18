@@ -46,7 +46,6 @@ public class CheckThreeServlet extends BaseServlet {
 
 		Checko co = new Checko();
 		ArrayList<Checko> cc = co.ckuser();
-		System.out.println(co.getName());
 		request.setAttribute("cc", cc);
 
 		request.getRequestDispatcher("/workthree.jsp").forward(request, response);

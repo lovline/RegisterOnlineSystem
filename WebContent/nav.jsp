@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" %>
+
 <div class="row">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -86,4 +86,9 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+   
+
 </div>
+<c:if test="${ has_alert }">
+<div class="alert alert-success" role="alert">${ alert_info }</div>
+</c:if>

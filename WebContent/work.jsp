@@ -37,6 +37,7 @@
 					<td class="info">工作</td>
 					<td class="danger"><textarea style="resize: none" rows="5"
 							cols="60" name="tet" onclick="this.value='';">请输入。。。</textarea></td>
+
 				</b>
 			</tr>
 

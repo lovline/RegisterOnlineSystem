@@ -1,6 +1,7 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,11 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/register/")
 public class RegisterServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";  
-    static final String DB_URL="jdbc:mysql://localhost/oa";
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "123";  
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,15 +43,12 @@ public class RegisterServlet extends BaseServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		String realname = request.getParameter("realname");
+		realname = Helper.toUTF8(realname);
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
 		
-			UserBean bb=new UserBean();
-			bb.registerxx(email,realname,password);
-		
-		
-		String url = request.getContextPath() + "/login/";
+		String info = URLEncoder.encode("×¢²á³É¹¦£¬ÇëµÇÂ¼", "utf-8");
+		String url = request.getContextPath() + "/login/?alert=" + info;
 		response.sendRedirect(url);
 
 	}

@@ -31,6 +31,7 @@ public class UserBean {
 		db.insert(sql);
 		db.close();
 	}
+
 	// 查管理员id
 		public ArrayList<UserBean> gly() {
 			DB db = new DB();
@@ -52,6 +53,28 @@ public class UserBean {
 			db.close();
 			return list;
 		}
+
+	public void useridtorealname(int userid){
+		DB db = new DB();
+		String sql = "select * from user where id=\""+userid+"\"";
+		ResultSet ss=db.select(sql);
+		try {
+			if(ss.next()){
+//				NoteBean note = new NoteBean();
+				
+				this.realname=ss.getString("realname");
+			}
+		}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			db.close();
+			
+	}
+	
+	
+
 	public boolean login(){
 		DB db = new DB();
 		String sql = "select * from user where email=\""+ email + "\" and password=\""+password+"\"";
@@ -105,6 +128,7 @@ public class UserBean {
 				this.status = rs.getInt("status");
 				this.realname = rs.getString("realname");
 				this.email=rs.getString("email");
+				this.id=rs.getInt("id");
 				this.created_at = rs.getDate("created_at");
 				this.last_login_at = rs.getDate("last_login_at");
 				this.admin = this.status == ADMIN;

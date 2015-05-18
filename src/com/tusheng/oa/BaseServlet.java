@@ -1,6 +1,7 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ public class BaseServlet extends HttpServlet {
 	public String title = "";
 	public UserBean user = new UserBean();
 	public boolean isLogged = false;
+	public boolean has_alert = false;
     public BaseServlet() {
         super();
         this.setTitle(Constant.HOMEPAGE);
@@ -30,6 +32,32 @@ public class BaseServlet extends HttpServlet {
     private void setExtra(HttpServletRequest request) {
     	request.setAttribute("SITE_NAME", Constant.SITE_NAME);
     	request.setAttribute("title", this.title);
+    	String alert_info = request.getParameter("alert");
+    	if (alert_info != null && !alert_info.isEmpty()){
+    		has_alert = true;
+    		request.setAttribute("alert_info", alert_info);
+    	}
+    	request.setAttribute("has_alert", has_alert);
+    }
+    
+    protected boolean needLogin(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    	if (!this.isLogged){
+    		String alert = URLEncoder.encode("ÇëÏÈµÇÂ¼", "utf-8");
+    		String url = request.getContextPath() + "/login/?alert=" + alert;
+    		response.sendRedirect(url);
+    		return false;
+    	}
+    	return true;
+    }
+    
+    protected boolean needAdminLogin(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    	if (!this.isLogged && this.user.isAdmin()){
+    		String alert = URLEncoder.encode("ÇëÏÈµÇÂ¼", "utf-8");
+    		String url = request.getContextPath() + "/login/?alert=" + alert;
+    		response.sendRedirect(url);
+    		return false;
+    	}
+    	return true;
     }
     
     private void checkLogin(HttpServletRequest request){
@@ -59,7 +87,6 @@ public class BaseServlet extends HttpServlet {
     		}
     	}
     }
-    
     public void setTitle(String s){
     	this.title = s + "-" + Constant.SITE_NAME;
     }
@@ -82,6 +109,7 @@ public class BaseServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		setExtra(request);
 		checkLogin(request);
+
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 	}

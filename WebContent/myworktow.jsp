@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ include file="../header.jsp"%>
 <%@ include file="../nav.jsp"%>
+
 <b>我接受的工作</b>
 <div style="width: 600; float: right">
 	<br /> <br /> <br />
