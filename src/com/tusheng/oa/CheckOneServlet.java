@@ -62,11 +62,9 @@ public class CheckOneServlet extends BaseServlet {
 		request.setCharacterEncoding("UTF-8");
 		String detail = request.getParameter("tet");
 
-		int sw = Integer.parseInt(request.getParameter("worknum"));
-		// System.out.println(sw);
-		Checko co = new Checko();
-
+		Checko co = new Checko();	
 		co.check(detail);
+		
 
 		response.sendRedirect(request.getContextPath() + "/work/");
 	}

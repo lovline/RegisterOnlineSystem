@@ -31,7 +31,27 @@ public class UserBean {
 		db.insert(sql);
 		db.close();
 	}
-	
+	// 查管理员id
+		public ArrayList<UserBean> gly() {
+			DB db = new DB();
+			
+			ArrayList<UserBean> list =new ArrayList<UserBean>();
+			try {
+				UserBean userBean=new UserBean();
+				String s = "select * from user where status=" + 1;
+				ResultSet rs = db.select(s);
+				while (rs.next()) {
+					userBean.id =rs.getInt("id");
+					list.add(userBean);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+
+			}
+			db.close();
+			return list;
+		}
 	public boolean login(){
 		DB db = new DB();
 		String sql = "select * from user where email=\""+ email + "\" and password=\""+password+"\"";
@@ -160,6 +180,34 @@ public class UserBean {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public static ArrayList<UserBean> get_employees() {
+		// TODO Auto-generated method stub
+		DB db = new DB();
+		ArrayList<UserBean> list = new ArrayList<UserBean>();
+		
+		String s = "select * from user";
+		ResultSet rs = db.select(s);
+		try {
+			while (rs.next()) {
+				UserBean bean=new UserBean();
+				bean.id = rs.getInt("id");
+				bean.realname = rs.getString("realname");
+				list.add(bean);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		db.close();
+		return list;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getRealname() + "(" + this.getId() + ")";
 	}
 	
 }

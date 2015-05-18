@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.AbstractDocument.BranchElement;
 
 /**
  * Servlet implementation class LoginServlet
@@ -58,6 +59,7 @@ public class LoginServlet extends BaseServlet {
 		else{
 			response.sendRedirect(request.getContextPath() + "/register/");
 		}
+
 //		ArrayList<Checko> results = bean.ckuser(this.user.getId());
 //	    request.setAttribute("results", results);
 

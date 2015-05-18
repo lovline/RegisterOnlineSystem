@@ -18,16 +18,17 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/mywork/")
-public class MyworkServlet extends BaseServlet {
+@WebServlet("/leave/")
+public class leaveervlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public MyworkServlet() {
+	public leaveervlet() {
 		super();
-		this.setTitle("查看任务");
+        this.setTitle("考勤管理");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -39,18 +40,15 @@ public class MyworkServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-		if (!this.isLogged) {
+		if (!this.isLogged){
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
-		Checko co = new Checko();
-
+		Check chk = new Check();
 		int pid=this.user.getId();
-		ArrayList<Checko> cc =co.pkuser(pid);
-		response.setCharacterEncoding("UTF-8");
-		request.setAttribute("cc", cc);
-
-		request.getRequestDispatcher("/mywork.jsp").forward(request, response);
+		ArrayList<Check> list=chk.chekin();
+		request.setAttribute("custList", list);
+		request.getRequestDispatcher("/leave.jsp").forward(request, response);
 	}
 
 	/**
@@ -60,15 +58,19 @@ public class MyworkServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		int st = Integer.parseInt(request.getParameter("custId"));
-		int cid = Integer.parseInt(request.getParameter("workid"));
-		Checko co = new Checko();
-		co.stcheck(st,cid);
-		int pid=this.user.getId();
-		co.pkuser(pid);
+		//1.
+//		int type = (Integer.parseInt(request.getParameter("type")));
+//		HttpSession session=request.getSession();
+//		int uid=(int)session.getAttribute("userid");
+//		int pid=this.user.getId();
+//		Check chk = new Check();
+//		chk.check(type, uid);
+//		chk.chek(pid);
+
 		
-		response.sendRedirect(request.getContextPath() + "/mywork/");
+		
+		response.sendRedirect(request.getContextPath() + "/leave/");
+		
 	}
 
 }

@@ -71,6 +71,8 @@ public class BaseServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		setExtra(request);
 		checkLogin(request);
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 	}
 
 	/**
@@ -79,6 +81,9 @@ public class BaseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		setExtra(request);
+		checkLogin(request);
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 	}
 
 }

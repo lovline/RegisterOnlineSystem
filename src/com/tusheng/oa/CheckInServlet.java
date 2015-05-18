@@ -45,7 +45,8 @@ public class CheckInServlet extends BaseServlet {
 			return;
 		}
 		Check chk = new Check();
-		ArrayList<Check> list=chk.chek();
+		int pid=this.user.getId();
+		ArrayList<Check> list=chk.chek(pid);
 		request.setAttribute("custList", list);
 		request.getRequestDispatcher("/checkin.jsp").forward(request, response);
 	}
@@ -63,9 +64,10 @@ public class CheckInServlet extends BaseServlet {
 		int type = (Integer.parseInt(request.getParameter("type")));
 		HttpSession session=request.getSession();
 		int uid=(int)session.getAttribute("userid");
-		System.out.println(type+"***"+uid);
+		int pid=this.user.getId();
 		Check chk = new Check();
 		chk.check(type, uid);
+		chk.chek(pid);
 
 		
 		

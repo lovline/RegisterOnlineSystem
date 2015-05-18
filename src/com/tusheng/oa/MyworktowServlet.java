@@ -47,9 +47,8 @@ public class MyworktowServlet extends BaseServlet {
 		ArrayList<Checko> cc = co.ckuser();
 		response.setCharacterEncoding("UTF-8");
 		request.setAttribute("cc", cc);
-		
-
-		request.getRequestDispatcher("/mywork.jsp").forward(request, response);
+		request.getRequestDispatcher("/myworktow.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -60,17 +59,10 @@ public class MyworktowServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		int st = Integer.parseInt(request.getParameter("custId"));
-		int cid = Integer.parseInt(request.getParameter("workid"));
-
-		
-		HttpSession session=request.getSession();
-		int uid=(int)session.getAttribute("userid");
+		int jid = Integer.parseInt(request.getParameter("work.number"));
 		Checko co = new Checko();
-
-		co.stcheck(st,uid,cid);
-		
-		response.sendRedirect(request.getContextPath() + "/mywork/");
+		co.setmywork(jid);
+		response.sendRedirect(request.getContextPath() + "/myworktow/");
 	}
 
 }

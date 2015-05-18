@@ -18,16 +18,16 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/mywork/")
-public class MyworkServlet extends BaseServlet {
+@WebServlet("/workthree/")
+public class CheckThreeServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public MyworkServlet() {
+	public CheckThreeServlet() {
 		super();
-		this.setTitle("查看任务");
+		this.setTitle("查看工作");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -43,14 +43,13 @@ public class MyworkServlet extends BaseServlet {
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
-		Checko co = new Checko();
 
-		int pid=this.user.getId();
-		ArrayList<Checko> cc =co.pkuser(pid);
-		response.setCharacterEncoding("UTF-8");
+		Checko co = new Checko();
+		ArrayList<Checko> cc = co.ckuser();
+		System.out.println(co.getName());
 		request.setAttribute("cc", cc);
 
-		request.getRequestDispatcher("/mywork.jsp").forward(request, response);
+		request.getRequestDispatcher("/workthree.jsp").forward(request, response);
 	}
 
 	/**
@@ -60,15 +59,12 @@ public class MyworkServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		int st = Integer.parseInt(request.getParameter("custId"));
-		int cid = Integer.parseInt(request.getParameter("workid"));
+		super.doPost(request, response);
+		int gid = Integer.parseInt(request.getParameter("worknum2"));
 		Checko co = new Checko();
-		co.stcheck(st,cid);
-		int pid=this.user.getId();
-		co.pkuser(pid);
-		
-		response.sendRedirect(request.getContextPath() + "/mywork/");
+		co.gbmywork(gid);
+
+		response.sendRedirect(request.getContextPath() + "/workthree/");
 	}
 
 }
