@@ -37,7 +37,8 @@ public class mynoteServlet extends BaseServlet {
 		 ArrayList<NoteBean> notes = NoteBean.getnotes(this.user.getId());
 		 request.setAttribute("notes", notes);
 		 boolean is_public=true;
-		 ArrayList<NoteBean> notess = NoteBean.getallnotes(is_public);
+		 int userid=this.user.getId();
+		 ArrayList<NoteBean> notess = NoteBean.getallnotes(is_public,userid);
 		 request.setAttribute("notess", notess);
 		request.getRequestDispatcher("/mynote.jsp").forward(request, response);
 	}

@@ -44,9 +44,11 @@ public class NoteServlet extends BaseServlet {
 		// TODO Auto-generated method stub
 		
 		String subject1=request.getParameter("subject");
+		subject1 = Helper.toUTF8(subject1);
 		String content1=request.getParameter("content");
+		content1 = Helper.toUTF8(content1);
 		String is_public2=request.getParameter("is_public");
-		boolean is_public1=is_public2.equals("on");
+		boolean is_public1=is_public2 != null && is_public2.equals("on");
 		NoteBean ff=new NoteBean();
 		ff.creatnote(this.user.getId(), subject1, content1, is_public1);
 		String url = request.getContextPath() + "/mynote/";

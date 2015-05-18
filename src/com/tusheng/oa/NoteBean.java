@@ -11,10 +11,12 @@ public class NoteBean {
 	private int user_id ;
 	private String   subject ;
 	private  String content ;
+	private  String htmlContent ;
 	private  boolean is_public ; /* 0: 不公开 1:公开 */
 	private  Date created_at ;
 	private  Date updated_at ;
 	private  boolean status;  /* 0: 正常， 1：删除 */
+	private UserBean author = new UserBean();
 	public static ArrayList<NoteBean> getnotes(int user_id){
 		DB note1=new DB();
 		String sql="select * from note where user_id=\""+user_id+"\"";
@@ -41,12 +43,12 @@ public class NoteBean {
 		note1.close();
 		return notes;
 	}
-	public static ArrayList<NoteBean> getallnotes(boolean is_public){
+	public static ArrayList<NoteBean> getallnotes(boolean is_public,int userid){
 		DB note1=new DB();
 		int public1=0;
 		if (is_public)
 			{public1 = 1;}
-		String sql="select * from note where is_public=\""+public1+"\"";
+		String sql="select * from note where is_public=\""+public1+"\"and user_id!=\""+userid+"\"";
 		ResultSet ss=note1.select(sql);
 		ArrayList<NoteBean> notess = new ArrayList<NoteBean>();
 		try {
@@ -60,6 +62,7 @@ public class NoteBean {
 				note.created_at = ss.getDate("created_at");
 				note.updated_at = ss.getDate("updated_at");
 				note.status = ss.getInt("status") == 0;
+				note.author.login(note.user_id);
 				notess.add(note);
 			}
 		}
@@ -161,9 +164,14 @@ public class NoteBean {
 	public void setId(int id) {
 		this.id = id;
 	}
-	    
-	  
-	 
-
+	public UserBean getAuthor() {
+		return author;
+	}
+	public void setAuthor(UserBean author) {
+		this.author = author;
+	}
+	public String getHtmlContent() {
+		return this.content.replace("\r", "<br/>");
+	}
 
 }

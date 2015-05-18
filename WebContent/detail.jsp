@@ -3,9 +3,9 @@
 <%@ include file="header.jsp" %>
 <%@ include file="nav.jsp" %>
 <div class="row">
-<h1>${ note.subject }   </h1>
-<h3>内容  ${ note.content }   </h3>			
-<h3>是否公开 ${ note.is_public }</h3>
+<p class="bg-primary" style="font-size:25px">${ note.subject }   </p>
+<p class="bg-success" style="font-size:25px">  ${ note.htmlContent }   </p>			
+<p class="bg-info" style="font-size:25px">是否公开 ${ note.is_public } </p>
  
 </div>
 

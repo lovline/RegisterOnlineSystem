@@ -42,6 +42,7 @@ public class RegisterServlet extends BaseServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		String realname = request.getParameter("realname");
+		realname = Helper.toUTF8(realname);
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		

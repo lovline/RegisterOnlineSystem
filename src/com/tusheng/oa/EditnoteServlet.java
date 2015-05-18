@@ -71,7 +71,7 @@ public class EditnoteServlet extends BaseServlet {
 		System.out.println( subject1);
 		System.out.println( is_public1);
 		NoteBean ff=new NoteBean();
-		ff.updatenote(id, subject1, content1,is_public1);
+		ff.updatenote(id, Helper.toUTF8(subject1), Helper.toUTF8(content1),is_public1);
 		String url = request.getContextPath() + "/mynote/";
 		response.sendRedirect(url);
 		

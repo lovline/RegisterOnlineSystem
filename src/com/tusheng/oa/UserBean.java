@@ -31,6 +31,25 @@ public class UserBean {
 		db.insert(sql);
 		db.close();
 	}
+	public void useridtorealname(int userid){
+		DB db = new DB();
+		String sql = "select * from user where id=\""+userid+"\"";
+		ResultSet ss=db.select(sql);
+		try {
+			if(ss.next()){
+//				NoteBean note = new NoteBean();
+				
+				this.realname=ss.getString("realname");
+			}
+		}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			db.close();
+			
+	}
+	
 	
 	public boolean login(){
 		DB db = new DB();
