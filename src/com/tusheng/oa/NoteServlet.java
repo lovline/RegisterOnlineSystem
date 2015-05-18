@@ -42,11 +42,11 @@ public class NoteServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		super.doPost(request, response);
 		String subject1=request.getParameter("subject");
-		subject1 = Helper.toUTF8(subject1);
+		//subject1 = Helper.toUTF8(subject1);
 		String content1=request.getParameter("content");
-		content1 = Helper.toUTF8(content1);
+		//content1 = Helper.toUTF8(content1);
 		String is_public2=request.getParameter("is_public");
 		boolean is_public1=is_public2 != null && is_public2.equals("on");
 		NoteBean ff=new NoteBean();

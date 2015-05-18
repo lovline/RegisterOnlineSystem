@@ -67,9 +67,9 @@ public class EditnoteServlet extends BaseServlet {
 		boolean is_public1=is_public2.equals("on");
 		int id=Integer.parseInt(nid);
 		
-		System.out.println( is_public2);
-		System.out.println( subject1);
-		System.out.println( is_public1);
+		//System.out.println( is_public2);
+		//System.out.println( subject1);
+		//System.out.println( is_public1);
 		NoteBean ff=new NoteBean();
 		ff.updatenote(id, Helper.toUTF8(subject1), Helper.toUTF8(content1),is_public1);
 		String url = request.getContextPath() + "/mynote/";
