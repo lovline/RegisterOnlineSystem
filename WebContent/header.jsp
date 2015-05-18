@@ -11,8 +11,12 @@
 <title>${ title }</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/owl-carousel/owl.carousel.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css"></link>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-theme.min.css"></link>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/owl-carousel/owl.carousel.css"></link>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/owl-carousel/owl.theme.css"></link>
+
 
 </head>
 <body>

@@ -38,19 +38,16 @@ public class AskLeaveServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-		AbsenceBean bean = new AbsenceBean();  		
-	    try {
-	    if (!this.isLogged){
-			response.sendRedirect(request.getContextPath() + "/login/");
+		if (!super.needLogin(request, response)){
 			return;
 		}
+		else{
+		AbsenceBean bean = new AbsenceBean();  		
+	    
 	    ArrayList<AbsenceBean> results = bean.absenceout(this.user.getId());
 	    request.setAttribute("results", results);
 		request.getRequestDispatcher("/askleave.jsp").forward(request, response);
-	    } catch (Exception e) {
-        // TODO Auto-generated catch block
-			e.printStackTrace();
-	    }
+		}
 }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -63,9 +63,6 @@ public class MyworkServlet extends BaseServlet {
 		request.setCharacterEncoding("UTF-8");
 		int st = Integer.parseInt(request.getParameter("custId"));
 		int cid = Integer.parseInt(request.getParameter("workid"));
-	
-		
-
 		Checko co = new Checko();
 		co.stcheck(st,cid);
 		int pid=this.user.getId();

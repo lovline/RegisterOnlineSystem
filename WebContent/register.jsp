@@ -46,6 +46,7 @@
 		<li>考勤</li>
 		<li>查看公司公告</li>
 		<li>其他</li>
+		<li>我有账号，<a href="${pageContext.request.contextPath}/login/">我要登录</a></li>
 	</ul>
 </div>
 </div>

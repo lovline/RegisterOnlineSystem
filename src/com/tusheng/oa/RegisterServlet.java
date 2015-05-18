@@ -1,6 +1,7 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -45,12 +46,11 @@ public class RegisterServlet extends BaseServlet {
 		realname = Helper.toUTF8(realname);
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		UserBean bb=new UserBean();
+		bb.registerxx(email,realname,password);
 		
-			UserBean bb=new UserBean();
-			bb.registerxx(email,realname,password);
-		
-		
-		String url = request.getContextPath() + "/login/";
+		String info = URLEncoder.encode("×¢²á³É¹¦£¬ÇëµÇÂ¼", "utf-8");
+		String url = request.getContextPath() + "/login/?alert=" + info;
 		response.sendRedirect(url);
 
 	}
