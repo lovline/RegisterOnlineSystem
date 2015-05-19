@@ -31,10 +31,11 @@ public class AbsenceBean {
 		DB db = new DB();			
 		ArrayList<AbsenceBean> result = new ArrayList<AbsenceBean>();
 		try {
-			String s = "select created_at,start_time,end_time,status from absence where user_id=" + uid;
+			String s = "select id,created_at,start_time,end_time,status from absence where user_id=" + uid;
 			ResultSet rs = db.select(s);
 			while(rs.next()){
 				AbsenceBean bean = new AbsenceBean();
+				bean.id=rs.getInt("id");
 				bean.created_at = rs.getTimestamp("created_at");
 				bean.start_time = rs.getTimestamp("start_time");
 				bean.end_time = rs.getTimestamp("end_time");
@@ -50,13 +51,31 @@ public class AbsenceBean {
 			return result;
 		}
     }   
+    //批准
     public boolean mgabsencein(int id,int z) {
 		DB db = new DB();
 		String s = "update absence set status ="+ z +" where id=" + id;
-		db.insert(s);
+		db.update(s);
 		db.close();
 		return true;		
-    }      
+    }   
+    //请求销假
+    public boolean dabsencein(int ud,int d) {
+//    	System.out.println(d+ud);
+		DB db = new DB();
+		String s = "update absence set status ="+ d +" where id=" + ud;
+		db.update(s);
+		db.close();
+		return true;		
+    } 
+    //销假
+    public boolean xabsencein(int x,int x2) {
+		DB db = new DB();
+		String s = "update absence set status ="+ x2 +" where id=" + x;
+		db.update(s);
+		db.close();
+		return true;		
+    }    
     public ArrayList<Integer> userid() {
 		DB db = new DB();					
 		ArrayList<Integer> result = new ArrayList<Integer>();

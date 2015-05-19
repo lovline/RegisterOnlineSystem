@@ -57,7 +57,7 @@
 										<li><a
 											href="${pageContext.request.contextPath}/leave/">考勤管理</a></li>
 										<li><a
-											href="${pageContext.request.contextPath}/manage/absence/">请假管理</a></li>
+											href="${pageContext.request.contextPath}/absence/">请假管理</a></li>
 										<li><a
 											href="${pageContext.request.contextPath}/manage/user/">员工管理</a></li>
 										<li><a href="${pageContext.request.contextPath}/worktwo/">工作管理</a></li>

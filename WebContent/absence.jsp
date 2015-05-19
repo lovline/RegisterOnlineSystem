@@ -2,9 +2,10 @@
 	pageEncoding="utf-8"%>
 <%@ include file="header.jsp"%>
 <%@ include file="nav.jsp"%>
-<div class="row">
-	<h1 align="center">请假管理</h1>
-</div>
+	<b>请假管理——批准</b>
+	<br><br><br>
+<div style="width: 600; float: right"><a class="btn btn-primary btn-xs"
+		href="${pageContext.request.contextPath}/absencetwo/"><b>待销假信息</b></a></div>
 </br>
 <div>
 	<table align="center" class="table table-bordered">
@@ -16,12 +17,13 @@
 			<th>请假操作</th>
 		</tr>
 		<c:forEach items="${results}" var="result">
-			<form method="post" action="">
+
 				<tr class="bg-success">
 					<td>${result.name}</td>
 					<td>${result.created_at}</td>
 					<td>${result.start_time}</td>
 					<td>${result.end_time}</td>
+					<form method="post" action="">
 					<td><c:if test="${result.status == 1}">
 							<select name="z">
 								<option value="">选择</option>
@@ -30,10 +32,11 @@
 							</select>
 							<input type="hidden" name="aid" value="${result.id}" />   
         &nbsp;&nbsp;&nbsp;<input type="submit" value="提交"  class="btn btn-info"/>
+						</c:if><c:if test="${result.status ==2}">待销假
 						</c:if>
-						<c:if test="${result.status ==2">
-							<input type="hidden" name="aid" value="${result.id}" />   
-      	<input type="submit" value="销假"  class="btn btn-info"/>
+						<c:if test="${result.status ==3}">不批准
+						</c:if><c:if test="${result.status ==4}">等待销假
+						</c:if><c:if test="${result.status ==6}">等待销假
 						</c:if>
 						</td>
 				</tr>

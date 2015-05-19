@@ -13,14 +13,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class AbsenceServlet
  */
-@WebServlet("/absence/")
-public class AbsenceServlet extends BaseServlet {
+@WebServlet("/absencetwo/")
+public class AbsenceTwoServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AbsenceServlet() {
+    public AbsenceTwoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +34,7 @@ public class AbsenceServlet extends BaseServlet {
 		AbsenceBean bean = new AbsenceBean();  		
 	    ArrayList<AbsenceBean> result = bean.mgabsenceout();
 	    request.setAttribute("results", result);
-		request.getRequestDispatcher("/absence.jsp").forward(request, response);
+		request.getRequestDispatcher("/absencetwo.jsp").forward(request, response);
 	}
 
 	/**
@@ -43,12 +43,12 @@ public class AbsenceServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doPost(request,response);
-		int id = Integer.parseInt(request.getParameter("aid"));
-		int z = Integer.parseInt(request.getParameter("z"));
+		int x = Integer.parseInt(request.getParameter("xid"));
+		int x2 = Integer.parseInt(request.getParameter("xid2"));
 		
 		AbsenceBean bean = new AbsenceBean();
-		bean.mgabsencein(id,z);
-	    response.sendRedirect(request.getContextPath() + "/absence/");
+		bean.xabsencein(x, x2);
+	    response.sendRedirect(request.getContextPath() + "/absencetwo/");
 	}
 
 }

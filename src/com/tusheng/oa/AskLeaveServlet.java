@@ -63,6 +63,6 @@ public class AskLeaveServlet extends BaseServlet {
 	    String start_time = request.getParameter("start_time");
 		String end_time = request.getParameter("end_time");	
 		bean.absencein(uid,start_time,end_time);
-	    response.sendRedirect(request.getContextPath() + "/askleave/");
+	    response.sendRedirect(request.getContextPath() + "/askleavetwo/");
 	}
 }
