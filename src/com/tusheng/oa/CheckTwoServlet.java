@@ -43,8 +43,6 @@ public class CheckTwoServlet extends BaseServlet {
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
-		response.setCharacterEncoding("UTF-8");
-
 		Checko co = new Checko();
 		ArrayList<Checko> cc = co.ckuser();
 		ArrayList<UserBean> employees = UserBean.get_employees();
@@ -61,7 +59,7 @@ public class CheckTwoServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+		super.doGet(request, response);
 	
 		int sw = Integer.parseInt(request.getParameter("worknum"));
 		int uuid = Integer.parseInt(request.getParameter("custId"));

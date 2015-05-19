@@ -30,6 +30,16 @@ public class Check {
 		db.close();
 		return true;
 	}
+	//É¾³ý
+	public boolean deletcheck(int kqpe) {
+		// ResultSet rs =
+		DB db = new DB();
+		String sq = "delete from attendance where id="+kqpe;
+		db.update(sq);
+		db.close();
+		return true;
+	}
+	
 	public String nameselec(int u) {
 		DB db = new DB();
 		String realname = null;

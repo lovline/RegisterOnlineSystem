@@ -1,6 +1,7 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -63,9 +64,9 @@ public class CheckOneServlet extends BaseServlet {
 		String detail = request.getParameter("tet");
 		Checko co = new Checko();	
 		co.check(detail);
-		
 
-		response.sendRedirect(request.getContextPath() + "/work/");
+
+		response.sendRedirect(request.getContextPath() + "/worktwo/");
 	}
 
 }

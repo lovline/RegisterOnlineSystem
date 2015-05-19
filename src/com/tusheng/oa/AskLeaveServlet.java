@@ -55,12 +55,14 @@ public class AskLeaveServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doPost(request, response);
-		HttpSession session=request.getSession();
-		int uid=(int) session.getAttribute("userid");
+//		HttpSession session=request.getSession();
+//		int uid=(int) session.getAttribute("userid");
+
+		int uid=this.user.getId();
 		AbsenceBean bean = new AbsenceBean();
 	    String start_time = request.getParameter("start_time");
 		String end_time = request.getParameter("end_time");	
-		bean.absencein(uid,start_time,end_time, 0);
+		bean.absencein(uid,start_time,end_time);
 	    response.sendRedirect(request.getContextPath() + "/askleave/");
 	}
 }

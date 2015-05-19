@@ -12,20 +12,21 @@ public class AbsenceBean {
 	private int user_id;
 	private Date start_time;
 	private Date end_time;
-	private int status;
+	private int status; //1.审核  2.批准  3.不批准  4.销假
     private Date created_at;
     private String name;
    
-    public boolean absencein(int uid,String start_time,String end_time, int status) {
+    public boolean absencein(int uid,String start_time,String end_time) {
 		DB db = new DB();
 		Date d = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = format.format(d);
-		String s = "insert into absence set user_id =\"" + uid + "\", start_time= \"" + start_time + "\",end_time=\"" + end_time +"\",status=\"" +status + "\",created_at =\"" + now + "\"";
+		String s = "insert into absence set user_id =\"" + uid + "\", start_time= \"" + start_time + "\",end_time=\"" + end_time +"\",status=1,created_at =\"" + now + "\"";
 		db.insert(s);
 		db.close();
 		return true;
 	}
+    //ask
     public ArrayList<AbsenceBean> absenceout(int uid) {
 		DB db = new DB();			
 		ArrayList<AbsenceBean> result = new ArrayList<AbsenceBean>();
@@ -34,9 +35,9 @@ public class AbsenceBean {
 			ResultSet rs = db.select(s);
 			while(rs.next()){
 				AbsenceBean bean = new AbsenceBean();
-				bean.created_at = rs.getDate("created_at");
-				bean.start_time = rs.getDate("start_time");
-				bean.end_time = rs.getDate("end_time");
+				bean.created_at = rs.getTimestamp("created_at");
+				bean.start_time = rs.getTimestamp("start_time");
+				bean.end_time = rs.getTimestamp("end_time");
 				bean.status = rs.getInt("status");
 				result.add(bean);
 			}
@@ -107,9 +108,9 @@ public class AbsenceBean {
 				AbsenceBean bean = new AbsenceBean();
 				bean.id = rs.getInt("id");
 				bean.name=bean.nameselec(userid.get(i++));
-				bean.created_at = rs.getDate("created_at");
-				bean.start_time = rs.getDate("start_time");
-				bean.end_time = rs.getDate("end_time");
+				bean.created_at = rs.getTimestamp("created_at");
+				bean.start_time = rs.getTimestamp("start_time");
+				bean.end_time = rs.getTimestamp("end_time");
 				bean.status = rs.getInt("status");
 				result.add(bean);
 			}

@@ -41,8 +41,12 @@ public class Checko {
 	}
 
 	public boolean setwork(int sw, int uuid) {
-		DB db = new DB();
-		String sq = "update work set assignee_id=" + uuid + " where id=" + sw;
+		DB db = new DB();		
+		Date d = new Date();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String now = format.format(d);
+		String sq = "update work set assignee_id=" + uuid + ",created_at=\"" + now
+				+ "\" where id=" + sw;
 		db.update(sq);
 
 		return true;
@@ -54,17 +58,21 @@ public class Checko {
 		Date d = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = format.format(d);
-		String sq = "update work set status=3" + ",finish_at=\"" + now
+		String sq = "update work set status=3" + ",updated_at=\"" + now
 				+ "\" where id=" + jid;
 		db.update(sq);
 
 		return true;
 	}
 
-
+//¹Ø±Õ
 	public boolean gbmywork(int gid) {
 		DB db = new DB();
-		String sq = "update work set status=4" + " where id=" + gid;
+		Date d = new Date();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String now = format.format(d);
+		String sq = "update work set status=4" + ",finish_at=\"" + now
+				+ "\" where id=" + gid;
 		db.update(sq);
 		return true;
 	}
@@ -102,6 +110,9 @@ public class Checko {
 				co.id = rs.getInt("id");
 				co.detail = rs.getString("detail");
 				co.deadline = rs.getTimestamp("deadline");
+				co.created_at = rs.getTimestamp("created_at");
+				co.updated_at = rs.getTimestamp("updated_at");
+				co.finish_at = rs.getTimestamp("finish_at");
 				co.status = rs.getInt("status");
 				co.assignee_id = rs.getInt("assignee_id");
 				co.assignee.login(co.assignee_id);
@@ -195,8 +206,7 @@ public class Checko {
 		Date d = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = format.format(d);
-		String st2 = "update work set status=" + st + ",created_at=\"" + now
-				+ "\" where id=" + cid;
+		String st2 = "update work set status=" + st + " where id=" + cid;
 		db.update(st2);
 
 		db.close();

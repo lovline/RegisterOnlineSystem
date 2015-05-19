@@ -5,25 +5,6 @@
 <div style="width: 600">
 	<b>我的考勤</b>
 </div>
-<br />
-<br />
-<br />
-<table class="table table-bordered">
-	<tr class="info">
-		<th scope="col">编号</th>
-		<th scope="col">时间</th>
-		<th scope="col">签到</th>
-	</tr>
-	<c:forEach items="${custList}" var="ch" varStatus="list">
-		<tr class="active">
-			<td>${list.index+1}</td>
-			<td>${ch.checkin_time}</td>
-			<td><c:if test="${ch.type == 1}">下班
-				</c:if> <c:if test="${ch.type == 2}">上班				
-				</c:if></td>
-		</tr>
-	</c:forEach>
-</table>
 <br>
 <br>
 <br>
@@ -46,7 +27,7 @@
 		<th>提交</th>
 	</tr>
 	<form action=" " method="post">
-		<tr class="active">
+		<tr class="active" align="center">
 			<td><div id="time">&nbsp;</div></td>
 			<td><input type="radio" name="type" value="2"
 				class="btn btn-info" /></td>
@@ -56,5 +37,29 @@
 		</tr>
 	</form>
 </table>
+<br />
+<br />
+<br />
+<table class="table table-bordered">
+	<tr class="info" align="center" >
+	<b>
+		<th>编号</th>
+		<th>员工</th>
+		<th>时间</th>
+		<th >签到</th>
+	</b>
+	</tr>
+	<c:forEach items="${custList}" var="ch" varStatus="list">
+		<tr class="active" align="center" >
+			<td>${list.index+1}</td>
+			<td>${ch.name}</td>
+			<td>${ch.checkin_time}</td>
+			<td><c:if test="${ch.type == 1}">下班
+				</c:if> <c:if test="${ch.type == 2}">上班				
+				</c:if></td>
+		</tr>
+	</c:forEach>
+</table>
+
 </center>
 <%@ include file="footer.jsp"%>

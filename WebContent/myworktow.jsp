@@ -13,7 +13,7 @@
 <center>
 	<br /> <br /> <br />
 	<table width="600" class="table table-bordered">
-		<tr class="bg-primary">
+		<tr class="bg-primary" align="center" >
 			<b>
 				<td>时间</td>
 				<td>工作</td>
@@ -24,7 +24,7 @@
 		<c:forEach items="${cc}" var="cch" varStatus="li">
 			<c:if test="${cch.status==1}">
 				<form action="" method="post">
-					<tr class="bg-success">
+					<tr class="bg-success" align="center" >
 						<td width="200">${cch.deadline}</td>
 						<td>${cch.detail}</td>
 						<input type="hidden" name="work.number" value="${cch.id}" />

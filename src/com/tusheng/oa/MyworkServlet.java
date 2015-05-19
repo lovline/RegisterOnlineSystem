@@ -60,7 +60,7 @@ public class MyworkServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+		super.doGet(request, response);
 		int st = Integer.parseInt(request.getParameter("custId"));
 		int cid = Integer.parseInt(request.getParameter("workid"));
 		Checko co = new Checko();

@@ -59,16 +59,11 @@ public class leaveervlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//1.
-//		int type = (Integer.parseInt(request.getParameter("type")));
-//		HttpSession session=request.getSession();
-//		int uid=(int)session.getAttribute("userid");
-//		int pid=this.user.getId();
-//		Check chk = new Check();
-//		chk.check(type, uid);
-//		chk.chek(pid);
+		int kqpe = (Integer.parseInt(request.getParameter("kqnum")));
+		System.out.println(kqpe);
+		Check ce=new Check();
+		ce.deletcheck(kqpe);
 
-		
-		
 		response.sendRedirect(request.getContextPath() + "/leave/");
 		
 	}

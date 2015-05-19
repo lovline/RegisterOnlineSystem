@@ -13,7 +13,7 @@
 <center>
 	<br /> <br /> <br />
 	<table width="600" class="table table-bordered">
-		<tr class="bg-primary">
+		<tr class="bg-primary" align="center" >
 			<b>
 				<td>时间</td>
 				<td>工作</td>
@@ -24,7 +24,7 @@
 			<!-- 0: 正常 -->
 			<c:if test="${ch.status==0}">
 				<form action="" method="post">
-					<tr class="bg-success">
+					<tr class="bg-success" align="center" >
 						<td width="200">${ch.deadline}</td>
 						<td>${ch.detail}</td>
 						<td width="200"><select name="custId">
@@ -38,7 +38,7 @@
 			</c:if>
 			<!--  1：已经接受 -->
 			<c:if test="${ch.status==1}">
-				<tr>
+				<tr class="bg-success" align="center" >
 					<td width="200">${ch.deadline}</td>
 					<td>${ch.detail}</td>
 					<td width="150">已接</td>
@@ -46,7 +46,7 @@
 			</c:if>
 			<!--2: 拒绝 -->
 			<c:if test="${ch.status==2}">
-				<tr>
+				<tr class="bg-success" align="center" >
 					<td width="200">${ch.deadline}</td>
 					<td>${ch.detail}</td>
 					<td width="150">拒绝</td>
@@ -54,7 +54,7 @@
 			</c:if>
 			<!--  3：完成待验收 -->
 			<c:if test="${ch.status==3}">
-				<tr>
+				<tr class="bg-success" align="center" >
 					<td width="200">${ch.deadline}</td>
 					<td>${ch.detail}</td>
 					<td width="150">完成待验收</td>
@@ -62,7 +62,7 @@
 			</c:if>
 			<!--  4:完成 -->
 			<c:if test="${ch.status==4}">
-				<tr>
+				<tr class="bg-success" align="center" >
 					<td width="200">${ch.deadline}</td>
 					<td>${ch.detail}</td>
 					<td width="150">完成</td>
