@@ -47,7 +47,7 @@
 						<td width="50">${list.index+1}</td>
 						<td width="200">${ch.deadline}</td>
 						<td>${ch.detail}</td>
-						<td width="200">已分配>>>>>${ch.assignee.realname}</td>
+						<td width="200"><b for="exampleInputEmail1">已分配</b>>>>>><kbd>${ch.assignee.realname}</kbd></td>
 					</tr>
 			</c:if>
 		</c:forEach>

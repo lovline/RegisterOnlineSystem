@@ -16,7 +16,7 @@ public class Checko {
 	private int assignee_id;/* 工作接受人 */
 	private UserBean assigner = new UserBean();
 	private UserBean assignee = new UserBean();
-	
+
 	private String subject;
 	private String detail;
 	private Date deadline;
@@ -27,26 +27,27 @@ public class Checko {
 	private String name;
 	private int wid;
 
-	public boolean check(String detail) {
+	public boolean check(String detail,int gl) {
 
 		DB db = new DB();
 		Date d = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = format.format(d);
 		String sq = "insert into work set detail=\"" + detail + "\",status=0"
-				+ ",deadline=\"" + now + "\",assigner_id=2";
+				+ ",deadline=\"" + now + "\",assigner_id=" + gl;
 		db.insert(sq);
 		db.close();
 		return true;
 	}
 
+
 	public boolean setwork(int sw, int uuid) {
-		DB db = new DB();		
+		DB db = new DB();
 		Date d = new Date();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = format.format(d);
-		String sq = "update work set assignee_id=" + uuid + ",created_at=\"" + now
-				+ "\" where id=" + sw;
+		String sq = "update work set assignee_id=" + uuid + ",created_at=\""
+				+ now + "\" where id=" + sw;
 		db.update(sq);
 
 		return true;
@@ -65,7 +66,7 @@ public class Checko {
 		return true;
 	}
 
-//关闭
+	// 关闭
 	public boolean gbmywork(int gid) {
 		DB db = new DB();
 		Date d = new Date();
@@ -127,10 +128,10 @@ public class Checko {
 		return checks;
 	}
 
-	//普通用户查寻
+	// 普通用户查寻
 	public ArrayList<Checko> pkuser(int pid) {
 		DB db = new DB();
-		String sql = "select * from work where assignee_id="+pid;
+		String sql = "select * from work where assignee_id=" + pid;
 		ResultSet rs = db.select(sql);
 		ArrayList<Checko> checks = new ArrayList<Checko>();
 		try {
@@ -142,7 +143,7 @@ public class Checko {
 				co.status = rs.getInt("status");
 				checks.add(co);
 			}
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -151,7 +152,6 @@ public class Checko {
 		return checks;
 	}
 
-	
 	//
 	public ArrayList<Checko> wkuser(int uid) {
 		DB db = new DB();
@@ -180,6 +180,7 @@ public class Checko {
 		db.close();
 		return checks;
 	}
+
 	// 查寻用户Id
 	public ArrayList<Integer> assid() {
 		DB db = new DB();
@@ -212,8 +213,6 @@ public class Checko {
 		db.close();
 		return true;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -318,6 +317,7 @@ public class Checko {
 	public void setWid(int wid) {
 		this.wid = wid;
 	}
+
 	public UserBean getAssigner() {
 		return assigner;
 	}

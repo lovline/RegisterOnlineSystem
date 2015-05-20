@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ include file="../header.jsp"%>
 <%@ include file="../nav.jsp"%>
-<b>分配工作</b>
+<b>处理工作</b>
 <div style="width: 600; float: right">
 	<br /> <br /> <br />
 	<a class="btn btn-primary btn-xs"
