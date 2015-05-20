@@ -2,12 +2,11 @@
 	pageEncoding="utf-8"%>
 <%@ include file="header.jsp"%>
 <%@ include file="nav.jsp"%>
-	<b>请假管理——批准</b>
+	<b>请假管理——批准/记录</b>
 	<br><br><br>
 <div style="width: 600; float: right"><a class="btn btn-primary btn-xs"
 		href="${pageContext.request.contextPath}/absencetwo/"><b>待销假信息</b></a></div>
-</br>
-<div>
+<div><br><br>
 	<table align="center" class="table table-bordered">
 		<tr class="bg-primary">
 			<th>姓名</th>
@@ -36,7 +35,7 @@
 						</c:if>
 						<c:if test="${result.status ==3}">不批准
 						</c:if><c:if test="${result.status ==4}">等待销假
-						</c:if><c:if test="${result.status ==6}">等待销假
+						</c:if><c:if test="${result.status ==5}">已销假
 						</c:if>
 						</td>
 				</tr>

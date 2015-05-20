@@ -9,7 +9,7 @@
 		class="btn btn-primary btn-xs"
 		href="${pageContext.request.contextPath}/work/"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新增&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
 		class="btn btn-primary btn-xs"
-		href="${pageContext.request.contextPath}/workthree/"><b>待处理任务</b></a>
+		href="${pageContext.request.contextPath}/workthree/"><b>处理中任务</b></a>
 </div>
 <center>
 
@@ -42,13 +42,21 @@
 					</tr>
 				</form>
 			</c:if>
-			<c:if test="${ch.assignee_id!=0}">
+			<c:if test="${ch.assignee_id!=0&&ch.status!=4}">
 			<tr class="bg-success" align="center" >
 						<td width="50">${list.index+1}</td>
 						<td width="200">${ch.deadline}</td>
 						<td>${ch.detail}</td>
-						<td width="200"><b for="exampleInputEmail1">已分配</b>>>>>><kbd>${ch.assignee.realname}</kbd></td>
+						<td width="200"><b for="exampleInputEmail1">已分配</b><kbd>${ch.assignee.realname}</kbd></td>
 					</tr>
+			</c:if>
+			<c:if test="${ch.status==4&&ch.assignee_id!=0}">
+				<tr class="bg-success" align="center" >
+					<td width="50">${list.index+1}</td>
+						<td width="200">${ch.deadline}</td>
+						<td>${ch.detail}</td>
+						<td width="200">完成</td>
+				</tr>
 			</c:if>
 		</c:forEach>
 	</table>

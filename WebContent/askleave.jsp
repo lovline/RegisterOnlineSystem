@@ -14,9 +14,10 @@
 </script>
 <b>申请请假：</b>
 <br><br><br>
+<br><br><br>
 <div style="width: 600; float: right"><a class="btn btn-primary btn-xs"
-		href="${pageContext.request.contextPath}/askleavetwo/"><b>请假信息</b></a></div>
-		<br>
+		href="${pageContext.request.contextPath}/askleavetwo/"><b>请假状态</b></a></div>
+		<br><br>
 <table class="table table-bordered">
 
 	<tr class="bg-primary">

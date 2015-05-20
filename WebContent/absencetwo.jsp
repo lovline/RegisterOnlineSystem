@@ -10,8 +10,7 @@
 	<a class="btn btn-primary btn-xs"
 		href="${pageContext.request.contextPath}/absence/"><b>所有请假信息</b></a>
 </div>
-</br>
-
+<br><br>
 <table align="center" class="table table-bordered">
 	<tr class="bg-primary">
 		<th>姓名</th>

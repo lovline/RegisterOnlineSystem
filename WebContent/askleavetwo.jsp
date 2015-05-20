@@ -10,7 +10,7 @@
 	<a class="btn btn-primary btn-xs"
 		href="${pageContext.request.contextPath}/askleave/"><b>请假</b></a>
 </div>
-<br>
+<br><br>
 <table class="table table-bordered">
 	<tr class="bg-primary">
 		<th>申请时间</th>
