@@ -5,7 +5,7 @@
 
 <div class="row">
 <div class='col-md-8'>
-<form class="form-horizontal" method="post" >
+<form class="form-horizontal" method="post" action="">
   <div class="form-group">
     <label for="email" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">

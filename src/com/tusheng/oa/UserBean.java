@@ -22,37 +22,37 @@ public class UserBean {
 	private Date last_login_at;
 	private Date created_at;
 	private boolean admin=false;
+	
 	public void registerxx(String email,String realname,String password){
 		DB db = new DB();
 		
 		String sql = "insert into user set email=\"" + email + "\",realname=\"" + realname + 
 				"\", password=\""+password + "\",is_active=true,status=0";
-		
 		db.insert(sql);
 		db.close();
 	}
 
-	// 查管理员id
-		public ArrayList<UserBean> gly() {
-			DB db = new DB();
-			
-			ArrayList<UserBean> list =new ArrayList<UserBean>();
-			try {
-				UserBean userBean=new UserBean();
-				String s = "select * from user where status=" + 1;
-				ResultSet rs = db.select(s);
-				while (rs.next()) {
-					userBean.id =rs.getInt("id");
-					list.add(userBean);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-
-			}
-			db.close();
-			return list;
-		}
+//	// 查管理员id
+//		public ArrayList<UserBean> gly() {
+//			DB db = new DB();
+//			
+//			ArrayList<UserBean> list =new ArrayList<UserBean>();
+//			try {
+//				UserBean userBean=new UserBean();
+//				String s = "select * from user where status=" + 1;
+//				ResultSet rs = db.select(s);
+//				while (rs.next()) {
+//					userBean.id =rs.getInt("id");
+//					list.add(userBean);
+//				}
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//
+//			}
+//			db.close();
+//			return list;
+//		}
 
 	public void useridtorealname(int userid){
 		DB db = new DB();
