@@ -14,12 +14,14 @@ public class Check {
 	private Date checkin_time;
 	private int type;
 	private String name;
+	private Date times;
 
 	public boolean check(int type, int uid) {
 		// ResultSet rs =
+		
 		DB db = new DB();
 		Date d = new Date();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = format.format(d);
 		String sq = "insert into attendance set type=" + type + " ,user_id="
 				+ uid+" ,checkin_time=\""+now+ "\"";
@@ -115,6 +117,7 @@ public class Check {
 					ck.name = ck.nameselec(userid.get(i++));
 					ck.checkin_time=rs.getTimestamp("checkin_time");
 					ck.type=rs.getInt("type");
+					ck.times=rs.getTime("checkin_time");
 					list.add(ck);
 				}
 			} catch (SQLException e) {
@@ -125,6 +128,61 @@ public class Check {
 			return list;
 	
 	}
+	//查签到时间 type=1; 下班
+	public ArrayList<Check> qdchek() {
+		DB db = new DB();
+		String sql ="SELECT * FROM attendance WHERE  TYPE=1 AND DATE_FORMAT(checkin_time,'%H')<16";
+		ResultSet rs = db.select(sql);
+		ArrayList<Check> list=new ArrayList<Check>();
+		Check cbean=new Check();
+		ArrayList<Integer> userid = cbean.assid();	
+		int i=0;
+			try {
+				while (rs.next()) {
+					Check ck=new Check();
+					ck.id = rs.getInt("id");
+					ck.name = ck.nameselec(userid.get(i++));
+					ck.checkin_time=rs.getTimestamp("checkin_time");
+					ck.type=rs.getInt("type");
+					ck.times=rs.getTime("checkin_time");
+					list.add(ck);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			db.close();
+			return list;
+	
+	}
+	// type=2； 上班
+	public ArrayList<Check> qbchek() {
+		DB db = new DB();
+		String sql ="SELECT * FROM attendance WHERE  TYPE=2 AND DATE_FORMAT(checkin_time,'%H')>09";
+		ResultSet rs = db.select(sql);
+		ArrayList<Check> list=new ArrayList<Check>();
+		Check cbean=new Check();
+		ArrayList<Integer> userid = cbean.assid();	
+		int i=0;
+			try {
+				while (rs.next()) {
+					Check ck=new Check();
+					ck.id = rs.getInt("id");
+					ck.name = ck.nameselec(userid.get(i++));
+					ck.checkin_time=rs.getTimestamp("checkin_time");
+					ck.type=rs.getInt("type");
+					ck.times=rs.getTime("checkin_time");
+					list.add(ck);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			db.close();
+			return list;
+	
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -166,6 +224,12 @@ public class Check {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Date getTimes() {
+		return times;
+	}
+	public void setTimes(Date times) {
+		this.times = times;
 	}
 
 }

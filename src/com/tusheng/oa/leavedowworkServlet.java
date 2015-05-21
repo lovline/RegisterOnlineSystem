@@ -1,8 +1,13 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +18,16 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/checkin/")
-public class CheckInServlet extends BaseServlet {
+@WebServlet("/leavedowwork/")
+public class leavedowworkServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CheckInServlet() {
+	public leavedowworkServlet() {
 		super();
-		this.setTitle("¿¼ÇÚ");
+		this.setTitle("¿¼ÇÚ¹ÜÀí");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -39,11 +44,10 @@ public class CheckInServlet extends BaseServlet {
 			return;
 		}
 		Check chk = new Check();
-		int pid = this.user.getId();
-		ArrayList<Check> list = chk.chek(pid);
+		ArrayList<Check> list = chk.qbchek();
 		request.setAttribute("custList", list);
-
-		request.getRequestDispatcher("/checkin.jsp").forward(request, response);
+		request.getRequestDispatcher("/leavedowwork.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -53,14 +57,16 @@ public class CheckInServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int type = Integer.parseInt(request.getParameter("type"));
-		HttpSession session = request.getSession();
-		int uid = (int) session.getAttribute("userid");
-		int pid = this.user.getId();
-		Check chk = new Check();
-		chk.check(type, uid);
-		chk.chek(pid);
-		response.sendRedirect(request.getContextPath() + "/checkin/");
+		// 1.
+		String kqId = request.getParameter("kqId");
+		System.out.println(kqId);
+		if(kqId.equals("1")){
+			response.sendRedirect(request.getContextPath() + "/leaveupwork/");
+		}else if(kqId.equals("2")){
+			response.sendRedirect(request.getContextPath() + "/leavedowwork/");
+		}else if(kqId.equals("")){
+		response.sendRedirect(request.getContextPath() + "/leave/");
+		}
 	}
 
 }

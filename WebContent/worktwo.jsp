@@ -9,11 +9,12 @@
 		class="btn btn-primary btn-xs"
 		href="${pageContext.request.contextPath}/work/"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新增&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
 		class="btn btn-primary btn-xs"
-		href="${pageContext.request.contextPath}/workthree/"><b>处理中任务</b></a>
+		href="${pageContext.request.contextPath}/workthree/"><b>处理中任务</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+		class="btn btn-primary btn-xs"
+		href="${pageContext.request.contextPath}/workupdate/"><b>被拒绝任务</b></a>
 </div>
 <center>
-
-
+	<br /> <br /> <br />
 	<table class="table table-bordered">
 		<tr class="bg-primary" align="center" >
 			<b>
@@ -58,6 +59,8 @@
 						<td width="200">完成</td>
 				</tr>
 			</c:if>
+			
+			
 		</c:forEach>
 	</table>
 </center>
