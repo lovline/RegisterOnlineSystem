@@ -53,14 +53,17 @@ public class CheckInServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int type = Integer.parseInt(request.getParameter("type"));
+		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		int uid = (int) session.getAttribute("userid");
 		int pid = this.user.getId();
-		Check chk = new Check();
-		chk.check(type, uid);
-		chk.chek(pid);
-		response.sendRedirect(request.getContextPath() + "/checkin/");
-	}
-
+		if(type!=null){
+			Check chk = new Check();
+			chk.check(Integer.parseInt(type), uid);
+			chk.chek(pid);
+			response.sendRedirect(request.getContextPath() + "/checkin/");
+		}else if(type==null){
+				response.sendRedirect(request.getContextPath() + "/checkin/");
+			}
+		}
 }

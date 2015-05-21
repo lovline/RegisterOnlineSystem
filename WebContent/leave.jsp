@@ -27,13 +27,13 @@
 <table  class="table">
 	<tr  align="right">
 		<td colspan="3"></td>
-		<td><form action="" method="post">
+		<td><form action="" method="post"><b>
 				<select name="kqId">
 					<option value="">请选择上下班状态</option>
 					<option value="2">上班迟到</option>
 					<option value="1">下班早退</option>
 				</select> &nbsp;&nbsp;&nbsp; <input type="submit" value="查询"
-					 class="btn btn-default btn-xs"/>
+					 class="btn btn-default btn-xs"/></b>
 			</form></td>
 		<td>
 </table>

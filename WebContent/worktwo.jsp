@@ -33,7 +33,7 @@
 						<td width="200">${ch.deadline}</td>
 						<td>${ch.detail}</td>
 						<td width="200"><select name="custId">
-								<option>选择员工</option>
+								<option value="">选择员工</option>
 								<c:forEach items="${cu}" var="u">
 									<option value="${ u.id }">${u.realname}</option>
 								</c:forEach>
