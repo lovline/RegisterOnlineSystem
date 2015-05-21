@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,53 +28,11 @@ public class UserBean {
 		DB db = new DB();
 		
 		String sql = "insert into user set email=\"" + email + "\",realname=\"" + realname + 
-				"\", password=\""+password + "\",is_active=true,status=0";
+				"\", password=\""+password + "\",is_active=true,status=0, created_at=\""+ 
+				Helper.formatDate(new Date()) + "\"";;
 		db.insert(sql);
 		db.close();
 	}
-
-//	// 查管理员id
-//		public ArrayList<UserBean> gly() {
-//			DB db = new DB();
-//			
-//			ArrayList<UserBean> list =new ArrayList<UserBean>();
-//			try {
-//				UserBean userBean=new UserBean();
-//				String s = "select * from user where status=" + 1;
-//				ResultSet rs = db.select(s);
-//				while (rs.next()) {
-//					userBean.id =rs.getInt("id");
-//					list.add(userBean);
-//				}
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//
-//			}
-//			db.close();
-//			return list;
-//		}
-
-	public void useridtorealname(int userid){
-		DB db = new DB();
-		String sql = "select * from user where id=\""+userid+"\"";
-		ResultSet ss=db.select(sql);
-		try {
-			if(ss.next()){
-//				NoteBean note = new NoteBean();
-				
-				this.realname=ss.getString("realname");
-			}
-		}
-			catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			db.close();
-			
-	}
-	
-	
 
 	public boolean login(){
 		DB db = new DB();
@@ -96,10 +55,10 @@ public class UserBean {
 				this.admin = this.status == ADMIN;
 				
 				Date d = new Date();
-				DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-				String now = format.format(d);
+				String now = Helper.formatDate(d);
 				String s = "update user set last_login_at=\"" + now + "\" where id=" + this.id;
 				db.update(s);
+				this.last_login_at = d;
 				
 				db.close();
 				return true;
@@ -130,7 +89,10 @@ public class UserBean {
 				this.email=rs.getString("email");
 				this.id=rs.getInt("id");
 				this.created_at = rs.getDate("created_at");
-				this.last_login_at = rs.getDate("last_login_at");
+				Timestamp stamp = rs.getTimestamp("last_login_at");
+				if (stamp != null){
+					this.last_login_at = new Date(stamp.getTime());
+				}
 				this.admin = this.status == ADMIN;
 				db.close();
 				return true;

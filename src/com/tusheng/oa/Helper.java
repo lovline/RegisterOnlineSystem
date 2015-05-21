@@ -1,6 +1,9 @@
 package com.tusheng.oa;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Helper {
 	public static String toUTF8(String src){
@@ -12,6 +15,12 @@ public class Helper {
 			e.printStackTrace();
 		}
 		return utf8Str;
+	}
+	
+	public static String formatDate(Date d){
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+		String str = format.format(d);
+		return str;
 	}
 
 }

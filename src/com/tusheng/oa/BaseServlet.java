@@ -35,9 +35,12 @@ public class BaseServlet extends HttpServlet {
     	String alert_info = request.getParameter("alert");
     	if (alert_info != null && !alert_info.isEmpty()){
     		has_alert = true;
-    		request.setAttribute("alert_info", alert_info);
+    	}
+    	else{
+    		has_alert = false;
     	}
     	request.setAttribute("has_alert", has_alert);
+    	request.setAttribute("alert_info", alert_info);
     }
     
     protected boolean needLogin(HttpServletRequest request, HttpServletResponse response) throws IOException{
