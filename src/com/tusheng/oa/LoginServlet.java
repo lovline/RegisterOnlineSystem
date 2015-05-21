@@ -34,6 +34,10 @@ public class LoginServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
+		if (this.isLogged){
+			response.sendRedirect(request.getContextPath() + "/index/");
+			return;
+		}
 		String jsp = "/login.jsp";
 		RequestDispatcher dispacher = request.getRequestDispatcher(jsp);
 		dispacher.forward(request, response);
