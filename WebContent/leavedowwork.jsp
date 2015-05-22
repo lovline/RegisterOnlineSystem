@@ -37,7 +37,7 @@
 					 class="btn btn-default btn-xs"/></b>
 			</form></td>
 		<td><a class="btn btn-primary btn-xs"
-			href="${pageContext.request.contextPath}/leave/"><b>返回</b></a></td>
+			href="${pageContext.request.contextPath}/leave/"><b>返回所有状态</b></a></td>
 	</tr>
 </table>
 <table class="table table-bordered">

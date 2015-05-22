@@ -3,6 +3,9 @@
 <%@ include file="header.jsp"%>
 <%@ include file="nav.jsp"%>
 <b>考勤管理</b>
+<br />
+<br />
+<br />
 <script language="javascript">
 	function box(org) {
 		if (org.checked == true) {
@@ -33,7 +36,7 @@
 					 class="btn btn-default btn-xs"/></b>
 			</form></td>
 		<td><a class="btn btn-primary btn-xs"
-			href="${pageContext.request.contextPath}/leave/"><b>返回</b></a></td>
+			href="${pageContext.request.contextPath}/leave/"><b>返回所有状态</b></a></td>
 	</tr>
 </table>
 <table class="table table-bordered">

@@ -41,8 +41,9 @@ public class CheckInServlet extends BaseServlet {
 		Check chk = new Check();
 		int pid = this.user.getId();
 		ArrayList<Check> list = chk.chek(pid);
-		request.setAttribute("custList", list);
-
+		request.setAttribute("custkq", list);
+		ArrayList<UserBean> employees = UserBean.get_kqemployees(pid);
+		request.setAttribute("cu", employees);
 		request.getRequestDispatcher("/checkin.jsp").forward(request, response);
 	}
 
@@ -54,16 +55,14 @@ public class CheckInServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String type = request.getParameter("type");
-		HttpSession session = request.getSession();
-		int uid = (int) session.getAttribute("userid");
 		int pid = this.user.getId();
-		if(type!=null){
-			Check chk = new Check();
-			chk.check(Integer.parseInt(type), uid);
-			chk.chek(pid);
-			response.sendRedirect(request.getContextPath() + "/checkin/");
-		}else if(type==null){
-				response.sendRedirect(request.getContextPath() + "/checkin/");
-			}
+		Check chk = new Check();
+		chk.check(Integer.parseInt(type), pid);
+		chk.chek(pid);
+		UserBean bean=new UserBean();
+		bean.get_kqemployees(pid);
+		
+		response.sendRedirect(request.getContextPath() + "/checkin/");
+		
 		}
 }

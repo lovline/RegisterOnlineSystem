@@ -189,6 +189,28 @@ public class UserBean {
 		db.close();
 		return list;
 	}
+	//¿¼ÇÚ
+	public static ArrayList<UserBean> get_kqemployees(int pid) {
+		// TODO Auto-generated method stub
+		DB db = new DB();
+		ArrayList<UserBean> list = new ArrayList<UserBean>();
+		
+		String s = "select * from user where id="+pid;
+		ResultSet rs = db.select(s);
+		try {
+			while (rs.next()) {
+				UserBean bean=new UserBean();
+				bean.id = rs.getInt("id");
+				bean.realname = rs.getString("realname");
+				list.add(bean);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		db.close();
+		return list;
+	}
 	
 	@Override
 	public String toString() {
