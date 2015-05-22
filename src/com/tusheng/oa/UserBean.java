@@ -33,6 +33,15 @@ public class UserBean {
 		db.insert(sql);
 		db.close();
 	}
+	public void updatemessage(String email,String realname,int pid){
+		DB db = new DB();
+		
+		String sql = "update user set email=\"" + email + "\",realname=\"" + realname +
+				"\""+"where id="+pid+";";
+		db.update(sql);
+		db.close();
+	}
+	
 
 	public boolean login(){
 		DB db = new DB();

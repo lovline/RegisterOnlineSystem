@@ -1,11 +1,18 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ChangePasswordServlet
@@ -35,6 +42,23 @@ public class ChangeUserInfoServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doPost(request, response);
+		String email = request.getParameter("email");
+		String name = request.getParameter("name");
+		int pid=this.user.getId();
+		String pw=this.user.getPassword();
+		System.out.println(pid);
+		System.out.println(pw);
+		if(!(email==null)||!(name==null)){
+			UserBean bean = new UserBean();
+			if(bean.login(pid)){
+				bean.updatemessage(email, name,pid);
+				HttpSession session = request.getSession();
+				session.setAttribute("userid", bean.getId());
+				String info = URLEncoder.encode("ÐÞ¸Ä³É¹¦", "utf-8");
+				response.sendRedirect(request.getContextPath() + "/index/?alert="+info);	
+			}
+		}
+		
 	}
 
 }

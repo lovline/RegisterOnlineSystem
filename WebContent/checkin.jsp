@@ -46,7 +46,7 @@
 		<th>编号</th>
 		<th>员工</th>
 		<th>时间</th>
-		<th >签到</th>
+		<th>签到</th>
 	</b>
 	</tr>
 	<c:forEach items="${custList}" var="ch" varStatus="list">
