@@ -46,8 +46,6 @@ public class ChangeUserInfoServlet extends BaseServlet {
 		String name = request.getParameter("name");
 		int pid=this.user.getId();
 		String pw=this.user.getPassword();
-		System.out.println(pid);
-		System.out.println(pw);
 		if(!(email==null)||!(name==null)){
 			UserBean bean = new UserBean();
 			if(bean.login(pid)){
