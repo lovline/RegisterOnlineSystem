@@ -11,18 +11,21 @@ public class Check {
 
 	private int id;
 	private int user_id;
+	private UserBean userid = new UserBean();
 	private Date checkin_time;
 	private int type;
 	private String name;
+	private Date times;
 
-	public boolean check(int type, int uid) {
+	public boolean check(int type, int pid) {
 		// ResultSet rs =
+		
 		DB db = new DB();
 		Date d = new Date();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = format.format(d);
 		String sq = "insert into attendance set type=" + type + " ,user_id="
-				+ uid+" ,checkin_time=\""+now+ "\"";
+				+ pid+" ,checkin_time=\""+now+ "\"";
 		db.insert(sq);
 
 
@@ -39,7 +42,7 @@ public class Check {
 		db.close();
 		return true;
 	}
-	
+	//管理查询
 	public String nameselec(int u) {
 		DB db = new DB();
 		String realname = null;
@@ -74,6 +77,35 @@ public class Check {
 		db.close();
 		return relist;
 	}
+
+	public ArrayList<Check> chek(int pid) {
+		System.out.println(pid);
+		DB db = new DB();
+		String sql = "select * from attendance where user_id="+pid;
+		ResultSet rs = db.select(sql);
+		ArrayList<Check> list2=new ArrayList<Check>();
+		Check cbean=new Check();
+		ArrayList<Integer> userid = cbean.assid();	
+		int i=0;
+			try {
+				while (rs.next()) {
+					Check ck=new Check();
+					ck.id = rs.getInt("id");
+					ck.name = ck.nameselec(userid.get(i++));
+					ck.checkin_time=rs.getTimestamp("checkin_time");
+					ck.type=rs.getInt("type");
+					ck.userid.login(ck.user_id);
+					list2.add(ck);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			db.close();
+			return list2;
+	
+	}
+	
 	public ArrayList<Check> chekin() {
 		DB db = new DB();
 		String sql = "select * from attendance ";
@@ -100,9 +132,38 @@ public class Check {
 			return list;
 	
 	}
-	public ArrayList<Check> chek(int pid) {
+
+	//查签到时间 type=1; 下班
+	public ArrayList<Check> qdchek() {
 		DB db = new DB();
-		String sql = "select * from attendance where user_id="+pid;
+		String sql ="SELECT * FROM attendance WHERE  TYPE=1 AND DATE_FORMAT(checkin_time,'%H')<16";
+		ResultSet rs = db.select(sql);
+		ArrayList<Check> list=new ArrayList<Check>();
+		Check cbean=new Check();
+		ArrayList<Integer> userid = cbean.assid();	
+		int i=0;
+			try {
+				while (rs.next()) {
+					Check ck=new Check();
+					ck.id = rs.getInt("id");
+					ck.name =ck.nameselec(userid.get(i++));
+					ck.checkin_time=rs.getTimestamp("checkin_time");
+					ck.type=rs.getInt("type");
+					ck.times=rs.getTime("checkin_time");
+					list.add(ck);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			db.close();
+			return list;
+	
+	}
+	// type=2； 上班
+	public ArrayList<Check> qbchek() {
+		DB db = new DB();
+		String sql ="SELECT * FROM attendance WHERE  TYPE=2 AND DATE_FORMAT(checkin_time,'%H：%i')>'09:00'";
 		ResultSet rs = db.select(sql);
 		ArrayList<Check> list=new ArrayList<Check>();
 		Check cbean=new Check();
@@ -125,6 +186,7 @@ public class Check {
 			return list;
 	
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -166,6 +228,18 @@ public class Check {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Date getTimes() {
+		return times;
+	}
+	public void setTimes(Date times) {
+		this.times = times;
+	}
+	public UserBean getUserid() {
+		return userid;
+	}
+	public void setUserid(UserBean userid) {
+		this.userid = userid;
 	}
 
 }
