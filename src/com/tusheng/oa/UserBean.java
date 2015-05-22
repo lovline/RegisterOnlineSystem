@@ -32,9 +32,7 @@ public class UserBean {
 				+ "where id =" + id;
 		db.insert(sql);
 		db.close();
-
 	}
-
 	public void registerxx(String email, String realname, String password) {
 		DB db = new DB();
 
@@ -221,17 +219,17 @@ public class UserBean {
 		return list;
 	}
 
-	//¿¼ÇÚ
+	// ¿¼ÇÚ
 	public static ArrayList<UserBean> get_kqemployees(int pid) {
 		// TODO Auto-generated method stub
 		DB db = new DB();
 		ArrayList<UserBean> list = new ArrayList<UserBean>();
-		
-		String s = "select * from user where id="+pid;
+
+		String s = "select * from user where id=" + pid;
 		ResultSet rs = db.select(s);
 		try {
 			while (rs.next()) {
-				UserBean bean=new UserBean();
+				UserBean bean = new UserBean();
 				bean.id = rs.getInt("id");
 				bean.realname = rs.getString("realname");
 				list.add(bean);
@@ -243,7 +241,7 @@ public class UserBean {
 		db.close();
 		return list;
 	}
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
