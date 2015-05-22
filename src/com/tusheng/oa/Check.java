@@ -29,7 +29,6 @@ public class Check {
 		db.insert(sq);
 
 
-
 		db.close();
 		return true;
 	}

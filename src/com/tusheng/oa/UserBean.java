@@ -33,6 +33,19 @@ public class UserBean {
 		db.insert(sql);
 		db.close();
 	}
+<<<<<<< HEAD
+=======
+	public void updatemessage(String email,String realname,int pid){
+		DB db = new DB();
+		
+		String sql = "update user set email=\"" + email + "\",realname=\"" + realname +
+				"\""+"where id="+pid+";";
+		db.update(sql);
+		db.close();
+	}
+	
+
+>>>>>>> e282512ce37a054c6949b4846cd554c3f85f4ad2
 	public void registerxx(String email, String realname, String password) {
 		DB db = new DB();
 
