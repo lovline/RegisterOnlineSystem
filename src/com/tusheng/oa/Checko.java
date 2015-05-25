@@ -31,7 +31,7 @@ public class Checko {
 
 		DB db = new DB();
 		Date d = new Date();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = format.format(d);
 		String sq = "insert into work set detail=\"" + detail + "\",status=0"
 				+ ",deadline=\"" + now + "\",assigner_id=" + gl;
@@ -44,10 +44,22 @@ public class Checko {
 	public boolean setwork(int sw, int uuid) {
 		DB db = new DB();
 		Date d = new Date();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = format.format(d);
 		String sq = "update work set assignee_id=" + uuid + ",created_at=\""
 				+ now + "\" where id=" + sw;
+		db.update(sq);
+
+		return true;
+	}
+	//ÖØÐÂ·ÖÅä
+	public boolean updatework(int cf) {
+		DB db = new DB();
+		Date d = new Date();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String now = format.format(d);
+		String sq = "update work set status=0,assignee_id=(null),created_at=\""
+				+ now + "\" where id=" + cf;
 		db.update(sq);
 
 		return true;
@@ -57,7 +69,7 @@ public class Checko {
 	public boolean setmywork(int jid) {
 		DB db = new DB();
 		Date d = new Date();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = format.format(d);
 		String sq = "update work set status=3" + ",updated_at=\"" + now
 				+ "\" where id=" + jid;
@@ -70,7 +82,7 @@ public class Checko {
 	public boolean gbmywork(int gid) {
 		DB db = new DB();
 		Date d = new Date();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = format.format(d);
 		String sq = "update work set status=4" + ",finish_at=\"" + now
 				+ "\" where id=" + gid;
@@ -205,7 +217,7 @@ public class Checko {
 	public boolean stcheck(int st, int cid) {
 		DB db = new DB();
 		Date d = new Date();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = format.format(d);
 		String st2 = "update work set status=" + st + " where id=" + cid;
 		db.update(st2);
