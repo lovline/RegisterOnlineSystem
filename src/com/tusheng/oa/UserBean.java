@@ -23,13 +23,77 @@ public class UserBean {
 	private Date last_login_at;
 	private Date created_at;
 	private boolean admin=false;
-	
+	public static ArrayList<UserBean> manageruser(){
+		DB na=new DB();
+		String sql="select * from user where is_active=1";
+		ResultSet ss=na.select(sql);
+		ArrayList<UserBean> user = new ArrayList<UserBean>();
+		try {
+			while(ss.next()){
+				UserBean user1= new UserBean();
+				user1.id = ss.getInt("id");
+				user1.email=ss.getString("email");
+				user1.realname=ss.getString("realname");
+				user.add(user1);
+			}
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		na.close();
+		return user;
+		
+	}
+	public void deleteuser(String[] usermanid){
+		DB db=new DB();
+		String ids = "";
+		for(int i=0; i<usermanid.length; i++){
+			ids += usermanid[i] + ",";
+		}
+		ids = ids.substring(0, ids.length()-1);
+		String sql="update user set is_active=0 where id in ("+ids+"); ";
+		db.update(sql);
+		db.close();
+	}
+	public static ArrayList<UserBean> renewuser(){
+		DB na=new DB();
+		String sql="select * from user where is_active=0";
+		ResultSet ss=na.select(sql);
+		ArrayList<UserBean> user = new ArrayList<UserBean>();
+		try {
+			while(ss.next()){
+				UserBean user1= new UserBean();
+				user1.id = ss.getInt("id");
+				user1.email=ss.getString("email");
+				user1.realname=ss.getString("realname");
+				user.add(user1);
+			}
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		na.close();
+		return user;
+		
+	}
+	public void renewuser(String[] reusermanid){
+		DB db=new DB();
+		String ids = "";
+		for(int i=0; i<reusermanid.length; i++){
+			ids += reusermanid[i] + ",";
+		}
+		ids = ids.substring(0, ids.length()-1);
+		String sql="update user set is_active=1 where id in ("+ids+"); ";
+		db.update(sql);
+		db.close();
+	}
 	public void registerxx(String email,String realname,String password){
 		DB db = new DB();
-		
 		String sql = "insert into user set email=\"" + email + "\",realname=\"" + realname + 
-				"\", password=\""+password + "\",is_active=true,status=0, created_at=\""+ 
-				Helper.formatDate(new Date()) + "\"";;
+				"\", password=\""+password + "\",is_active=1,status=0, created_at=\""+ 
+				Helper.formatDate(new Date()) + "\"";
 		db.insert(sql);
 		db.close();
 	}
