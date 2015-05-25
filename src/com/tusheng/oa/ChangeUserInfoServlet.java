@@ -45,19 +45,26 @@ public class ChangeUserInfoServlet extends BaseServlet {
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
 		int pid=this.user.getId();
-		String pw=this.user.getPassword();
 		
 		UserBean bean = new UserBean();
-		if(bean.login(pid)){
-			HttpSession session = request.getSession();
-			session.setAttribute("userid", bean.getId());
-			if(bean.updatemessage(email, name,pid)){
-				String info = URLEncoder.encode("修改成功！", "utf-8");
-				response.sendRedirect(request.getContextPath() + "/index/?alert="+info);
-			}else{
-				String info = URLEncoder.encode("该邮箱或用户名已被他人占用，请重新出入...", "utf-8");
-				response.sendRedirect(request.getContextPath() + "/user/change/?alert="+info);
+		String originEmail=bean.getEmail();
+		String originName=bean.getRealname();
+		
+		if(email==originEmail&name==originName){
+			if(bean.login(pid)){
+				HttpSession session = request.getSession();
+				session.setAttribute("userid", bean.getId());
+					if(bean.updatemessage(email, name,pid)){
+						String info = URLEncoder.encode("修改成功！", "utf-8");
+						response.sendRedirect(request.getContextPath() + "/index/?alert="+info);
+					}else{
+						String info = URLEncoder.encode("该邮箱或用户名已被他人占用，请重新出入...", "utf-8");
+						response.sendRedirect(request.getContextPath() + "/user/change/?alert="+info);
+					}
 			}
+		}else{
+			String info=URLEncoder.encode("与原邮箱、用户名一致，无需修改！","utf-8");
+			response.sendRedirect(request.getContextPath()+"/user/change/?alert="+info);
 		}
 		
 		
