@@ -18,18 +18,17 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/leavedowwork/")
-public class leavedowworkServlet extends BaseServlet {
+@WebServlet("/manage/user/")
+public class ManagerUserServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public leavedowworkServlet() {
-		super();
-		this.setTitle("¿¼ÇÚ¹ÜÀí");
+	
 		// TODO Auto-generated constructor stub
-	}
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -39,15 +38,15 @@ public class leavedowworkServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-		if (!this.isLogged) {
+		if (!this.isLogged){
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
-		Check chk = new Check();
-		ArrayList<Check> list = chk.qbchek();
-		request.setAttribute("custList", list);
-		request.getRequestDispatcher("/leavedowwork.jsp").forward(request,
-				response);
+		ArrayList<UserBean> user = UserBean.manageruser();
+		 request.setAttribute("user3", user);
+		 ArrayList<UserBean> reuser = UserBean.renewuser();
+		 request.setAttribute("user4", reuser);
+		request.getRequestDispatcher("/manageuser.jsp").forward(request, response);
 	}
 
 	/**
@@ -57,17 +56,30 @@ public class leavedowworkServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// 1.
-		String kqId = request.getParameter("kqId");
-		if(kqId.equals("1")){
-			response.sendRedirect(request.getContextPath() + "/leaveupwork/");
-		}else if(kqId.equals("2")){
-			response.sendRedirect(request.getContextPath() + "/leavedowwork/");
-		}else if(kqId.equals("3")){
-			response.sendRedirect(request.getContextPath() + "/leave/");
-		}else if(kqId.equals("")){
-		response.sendRedirect(request.getContextPath() + "/leavedowwork/");
-		}
+		super.doPost(request, response);
+		
+		String type = request.getParameter("type");
+		 String[] checked = request.getParameterValues("checked");
+		 if (type.equals("delete")){
+			 UserBean dd=new UserBean();
+				dd.deleteuser(checked);	 
+		 }
+		 else if (type.equals("restore")){
+			 UserBean ds=new UserBean();
+			ds.renewuser(checked); 
+		 }
+		 else{
+			 
+		 }
+		//System.out.println(usermana);
+//		UserBean dd=new UserBean();
+//		dd.deleteuser(usermana);
+//		
+//		int reuser = (Integer.parseInt(request.getParameter("reuserman")));
+//		UserBean ds=new UserBean();
+//		ds.renewuser(reuser);
+		response.sendRedirect(request.getContextPath() + "/manage/user/");
+			
 	}
 
 }

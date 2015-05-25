@@ -7,11 +7,6 @@
 
 <!--meta http-equiv="Content-Type" content="text/html; charset=gb2312" /-->
 <body>
-
-
-
-
-
 	<script language="javascript">
 		function CheckForm() {
 
@@ -20,7 +15,6 @@
 			if (pwd1 != pwd2) {
 				alert("您两次输入的密码不一样！请重新输入.");
 				return false;
-
 			}
 		}
 	</script>
@@ -28,7 +22,6 @@
 	<h1>密码修改</h1>
 	<form action=" " name="form1" method="post"
 		onsubmit="return CheckForm();">
-
 		初始密码:<input type="password" name="pwd" /><br />
 		</p>
 		密 &nbsp; &nbsp; 码 :<input type="password" id="pwd1" name="pwd1" /><br />
