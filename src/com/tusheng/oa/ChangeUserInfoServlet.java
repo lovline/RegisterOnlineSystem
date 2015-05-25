@@ -55,7 +55,7 @@ public class ChangeUserInfoServlet extends BaseServlet {
 				String info = URLEncoder.encode("修改成功！", "utf-8");
 				response.sendRedirect(request.getContextPath() + "/index/?alert="+info);
 			}else{
-				String info = URLEncoder.encode("该邮箱或用户名已被他人占用，请重新出入...", "utf-8");
+				String info = URLEncoder.encode("该邮箱或用户名已被他人占用，请重新输入...", "utf-8");
 				response.sendRedirect(request.getContextPath() + "/user/change/?alert="+info);
 			}
 		}

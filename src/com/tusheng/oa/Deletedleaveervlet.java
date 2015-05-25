@@ -22,13 +22,12 @@ import javax.servlet.http.HttpSession;
 public class Deletedleaveervlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public Deletedleaveervlet() {
 		super();
-        this.setTitle("考勤管理");
+		this.setTitle("考勤管理");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,15 +39,19 @@ public class Deletedleaveervlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-		if (!this.isLogged){
+		if (!this.isLogged) {
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
 		Check chk = new Check();
-		int pid=this.user.getId();
-		ArrayList<Check> list=chk.chekin();
+		int pid = this.user.getId();
+		ArrayList<Check> list = chk.chekin();
 		request.setAttribute("custList", list);
-		request.getRequestDispatcher("/updateleave.jsp").forward(request, response);
+
+		
+
+		request.getRequestDispatcher("/updateleave.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -58,21 +61,20 @@ public class Deletedleaveervlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//1.
-		//这是在java代码中获取checkbox的值   
-		String type = "";   
-		String[] type1 = request.getParameterValues("checkbox1");   
-		for (int i = 0; i < type1.length; i++) {   
-		   type += type1[i] + ",";   
-		}   
-		System.out.println(type);  
+		// 1.
+		// 这是在java代码中获取checkbox的值
+//		String type =request.getParameter("answer");
+		String[] type1 = request.getParameterValues("answer");
 		
-//		int inteId = Integer.parseInt(request.getParameter("inte"));
-//		System.out.println(inteId);
-//		Check check=new Check();
-//		check.deletcheck(inteId);
+		Check chk = new Check();
+		chk.deletcheck(type1);
+
+		// int inteId = Integer.parseInt(request.getParameter("inte"));
+		// System.out.println(inteId);
+		// Check check=new Check();
+		// check.deletcheck(inteId);
 		response.sendRedirect(request.getContextPath() + "/updateleave/");
-		
+
 	}
 
 }
