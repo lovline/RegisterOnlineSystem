@@ -34,10 +34,10 @@ public class Check {
 		return true;
 	}
 	//删除
-	public boolean deletcheck(int kqpe) {
+	public boolean deletcheck(int inteId) {
 		// ResultSet rs =
 		DB db = new DB();
-		String sq = "delete from attendance where id="+kqpe;
+		String sq = "delete from attendance where id="+inteId;
 		db.update(sq);
 		db.close();
 		return true;
@@ -77,9 +77,8 @@ public class Check {
 		db.close();
 		return relist;
 	}
-
+	//用户签到信息查询
 	public ArrayList<Check> chek(int pid) {
-		System.out.println(pid);
 		DB db = new DB();
 		String sql = "select * from attendance where user_id="+pid;
 		ResultSet rs = db.select(sql);

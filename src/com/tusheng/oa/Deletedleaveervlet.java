@@ -18,16 +18,17 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/leavedowwork/")
-public class leavedowworkServlet extends BaseServlet {
+@WebServlet("/updateleave/")
+public class Deletedleaveervlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public leavedowworkServlet() {
+	public Deletedleaveervlet() {
 		super();
-		this.setTitle("考勤管理");
+        this.setTitle("考勤管理");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -39,15 +40,15 @@ public class leavedowworkServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-		if (!this.isLogged) {
+		if (!this.isLogged){
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
 		Check chk = new Check();
-		ArrayList<Check> list = chk.qbchek();
+		int pid=this.user.getId();
+		ArrayList<Check> list=chk.chekin();
 		request.setAttribute("custList", list);
-		request.getRequestDispatcher("/leavedowwork.jsp").forward(request,
-				response);
+		request.getRequestDispatcher("/updateleave.jsp").forward(request, response);
 	}
 
 	/**
@@ -57,17 +58,21 @@ public class leavedowworkServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// 1.
-		String kqId = request.getParameter("kqId");
-		if(kqId.equals("1")){
-			response.sendRedirect(request.getContextPath() + "/leaveupwork/");
-		}else if(kqId.equals("2")){
-			response.sendRedirect(request.getContextPath() + "/leavedowwork/");
-		}else if(kqId.equals("3")){
-			response.sendRedirect(request.getContextPath() + "/leave/");
-		}else if(kqId.equals("")){
-		response.sendRedirect(request.getContextPath() + "/leavedowwork/");
-		}
+		//1.
+		//这是在java代码中获取checkbox的值   
+		String type = "";   
+		String[] type1 = request.getParameterValues("checkbox1");   
+		for (int i = 0; i < type1.length; i++) {   
+		   type += type1[i] + ",";   
+		}   
+		System.out.println(type);  
+		
+//		int inteId = Integer.parseInt(request.getParameter("inte"));
+//		System.out.println(inteId);
+//		Check check=new Check();
+//		check.deletcheck(inteId);
+		response.sendRedirect(request.getContextPath() + "/updateleave/");
+		
 	}
 
 }
