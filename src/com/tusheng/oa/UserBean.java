@@ -111,8 +111,6 @@ public class UserBean {
 		db.update(sql);
 		db.close();
 	}
-	
-
 
 	public void registerxx(String email, String realname, String password) {
 		DB db = new DB();
