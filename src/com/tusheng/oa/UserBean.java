@@ -102,13 +102,14 @@ public class UserBean {
 		db.close();
 	}
 
-	public boolean updatemessage(String email,String realname,int pid){
+	public boolean updateUserMessage(String email,String realname,int pid){
 
 		DB db = new DB();
 		String sql = "update user set email=\"" + email + "\",realname=\"" + realname +
 				"\""+"where id="+pid+";";
 		String sql1="select email from user where email=\""+email+"\" and id!="+pid+";";
-		String sql2="select realname from user where realname=\""+realname+"\" and id!="+pid+";";
+		String sql2="select realname from user where realname=\""+realname+"\" and id!="
+				+pid+";";
 		
 		ResultSet rs1=db.select(Helper.toUTF8(sql1));
 		ResultSet rs2=db.select(Helper.toUTF8(sql2));
