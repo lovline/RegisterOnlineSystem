@@ -44,7 +44,7 @@ public class RegisterServlet extends BaseServlet {
 		super.doPost(request, response);
 		//response.setCharacterEncoding("UTF-8");
 		String realname = request.getParameter("realname");
-		//realname = Helper.toUTF8(realname);
+		realname = Helper.toUTF8(realname);
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		UserBean userBean=new UserBean();

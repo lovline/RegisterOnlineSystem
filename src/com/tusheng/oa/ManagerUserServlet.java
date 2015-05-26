@@ -42,6 +42,10 @@ public class ManagerUserServlet extends BaseServlet {
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
+		ArrayList<UserBean> admin = UserBean.admin();
+		 request.setAttribute("admin1", admin);
+		 ArrayList<UserBean> notadmin = UserBean.notAdmin();
+		 request.setAttribute("admin3", notadmin);
 		ArrayList<UserBean> user = UserBean.manageruser();
 		 request.setAttribute("user3", user);
 		 ArrayList<UserBean> reuser = UserBean.renewuser();
@@ -68,6 +72,15 @@ public class ManagerUserServlet extends BaseServlet {
 			 UserBean ds=new UserBean();
 			ds.renewuser(checked); 
 		 }
+		 else if (type.equals("beadmin")){
+			 UserBean ds=new UserBean();
+			ds.toBeAdmin(checked); 
+		 }
+		 else if (type.equals("notbeadmin")){
+			 UserBean ds=new UserBean();
+			ds.cancelAdmin(checked); 
+		 }
+		 
 		 else{
 			 
 		 }
