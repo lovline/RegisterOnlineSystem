@@ -42,7 +42,8 @@ public class NoteServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(request, response);
+		//super.doPost(request, response);
+		request.setCharacterEncoding("UTF-8");
 		String subject1=request.getParameter("subject");
 		//subject1 = Helper.toUTF8(subject1);
 		String content1=request.getParameter("content");

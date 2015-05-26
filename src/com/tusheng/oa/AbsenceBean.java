@@ -19,7 +19,7 @@ public class AbsenceBean {
     public boolean absencein(int uid,String start_time,String end_time) {
 		DB db = new DB();
 		Date d = new Date();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = format.format(d);
 		String s = "insert into absence set user_id =\"" + uid + "\", start_time= \"" + start_time + "\",end_time=\"" + end_time +"\",status=1,created_at =\"" + now + "\"";
 		db.insert(s);

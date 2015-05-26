@@ -60,13 +60,19 @@ public class CheckTwoServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-	
-		int sw = Integer.parseInt(request.getParameter("worknum"));
-		int uuid = Integer.parseInt(request.getParameter("custId"));
-		Checko co = new Checko();
-		co.setwork(sw,uuid);
-
-		response.sendRedirect(request.getContextPath() + "/worktwo/");
+		request.setCharacterEncoding("UTF-8");
+		
+		String sw = request.getParameter("worknum");
+		String uuid = request.getParameter("custId");
+		if(uuid!=null){
+			Checko co = new Checko();
+			co.setwork(Integer.parseInt(sw),Integer.parseInt(uuid));
+			response.sendRedirect(request.getContextPath() + "/worktwo/");	
+			return;
+		}else if(uuid==null){
+			response.sendRedirect(request.getContextPath() + "/worktwo/");
+			return;
+		}
 	}
 
 }

@@ -66,7 +66,6 @@ public class CheckOneServlet extends BaseServlet {
 		Checko co = new Checko();
 		int gl=this.user.getId();
 		co.check(detail,gl);
-		System.out.println(gl);
 
 		response.sendRedirect(request.getContextPath() + "/worktwo/");
 	}

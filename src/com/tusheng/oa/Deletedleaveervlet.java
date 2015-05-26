@@ -1,8 +1,13 @@
 package com.tusheng.oa;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +18,16 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CheckInServlet
  */
-@WebServlet("/checkin/")
-public class CheckInServlet extends BaseServlet {
+@WebServlet("/updateleave/")
+public class Deletedleaveervlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CheckInServlet() {
+	public Deletedleaveervlet() {
 		super();
-		this.setTitle("考勤");
+		this.setTitle("考勤管理");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,11 +45,13 @@ public class CheckInServlet extends BaseServlet {
 		}
 		Check chk = new Check();
 		int pid = this.user.getId();
-		ArrayList<Check> list = chk.chek(pid);
-		request.setAttribute("custkq", list);
-		ArrayList<UserBean> employees = UserBean.get_kqemployees(pid);
-		request.setAttribute("cu", employees);
-		request.getRequestDispatcher("/checkin.jsp").forward(request, response);
+		ArrayList<Check> list = chk.chekin();
+		request.setAttribute("custList", list);
+
+		
+
+		request.getRequestDispatcher("/updateleave.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -54,15 +61,20 @@ public class CheckInServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String type = request.getParameter("type");
-		int pid = this.user.getId();
+		// 1.
+		// 这是在java代码中获取checkbox的值
+//		String type =request.getParameter("answer");
+		String[] type1 = request.getParameterValues("answer");
+		
 		Check chk = new Check();
-		chk.check(Integer.parseInt(type), pid);
-		chk.chek(pid);
-		UserBean bean=new UserBean();
-		bean.get_kqemployees(pid);
-		
-		response.sendRedirect(request.getContextPath() + "/checkin/");
-		
-		}
+		chk.deletcheck(type1);
+
+		// int inteId = Integer.parseInt(request.getParameter("inte"));
+		// System.out.println(inteId);
+		// Check check=new Check();
+		// check.deletcheck(inteId);
+		response.sendRedirect(request.getContextPath() + "/updateleave/");
+
+	}
+
 }

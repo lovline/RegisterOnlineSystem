@@ -15,9 +15,11 @@
 <b>新增工作</b>
 <div style="width: 600; float: right">
 	<br /> <br /> <br /> <a class="btn btn-primary btn-xs"
-		href="${pageContext.request.contextPath}/worktwo/"><b>查看分配</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+		href="${pageContext.request.contextPath}/worktwo/"><b>查看分配/已完成</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
 		class="btn btn-primary btn-xs"
-		href="${pageContext.request.contextPath}/workthree/"><b>处理中任务</b></a>
+		href="${pageContext.request.contextPath}/workthree/"><b>处理中任务</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+		class="btn btn-primary btn-xs"
+		href="${pageContext.request.contextPath}/workupdate/"><b>被拒绝任务</b></a>
 </div>
 
 <br>

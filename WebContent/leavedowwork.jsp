@@ -2,7 +2,10 @@
 	pageEncoding="utf-8"%>
 <%@ include file="header.jsp"%>
 <%@ include file="nav.jsp"%>
-<b>考勤管理</b>
+<b>考勤管理——上班 迟到</b>
+<br />
+<br />
+<br />
 <script language="javascript">
 	function box(org) {
 		if (org.checked == true) {
@@ -21,25 +24,19 @@
 		}
 	}
 </script>
-<br />
-<br />
-<br />
-<table class="table" >
-	<tr align="right">
-	
+
+<table  class="table">
+	<tr  align="right">
+		<td colspan="4"></td>
 		<td><form action="" method="post">
 				<select name="kqId">
-					<b><option value="">请选择上下班状态</option>
-						<option value="3">所有签到</option></b>
+					<b><option value="">请选择上下班状态</option></b>
+					<option value="3">所有签到</option>
 					<option value="2">上班迟到</option>
 					<option value="1">下班早退</option>
 				</select> &nbsp;&nbsp;&nbsp; <input type="submit" value="查询"
-					class="btn btn-default btn-xs" />
+					 class="btn btn-default btn-xs"/>
 			</form></td>
-			
-				<td><a class="btn btn-default btn-xs" 
-			href="${pageContext.request.contextPath}/updateleave/"><b>删除数据</b></a>
-		</td>
 	</tr>
 </table>
 <table class="table table-bordered">
@@ -54,14 +51,10 @@
 			<td>${list.index+1}</td>
 			<td>${ch.name}</td>
 			<td>${ch.checkin_time}</td>
-			<td><c:if test="${ch.type == 1}">下班			
-				</c:if>
-				<c:if test="${ch.type == 2}">上班			
-				</c:if></td>
+			<td>上班 迟到</td>
 		</tr>
 
 	</c:forEach>
-
 </table>
 
 
