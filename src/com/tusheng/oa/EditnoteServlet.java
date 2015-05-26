@@ -55,6 +55,9 @@ public class EditnoteServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		//super.doPost(request, response);
+		request.setCharacterEncoding("UTF-8");
 		String nid = request.getParameter("id");
 		
 		String subject1=request.getParameter("subject");
@@ -71,7 +74,7 @@ public class EditnoteServlet extends BaseServlet {
 		//System.out.println( subject1);
 		//System.out.println( is_public1);
 		NoteBean ff=new NoteBean();
-		ff.updatenote(id, Helper.toUTF8(subject1), Helper.toUTF8(content1),is_public1);
+		ff.updatenote(id, subject1, content1,is_public1);
 		String url = request.getContextPath() + "/mynote/";
 		response.sendRedirect(url);
 		

@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/user/change/")
 public class ChangeUserInfoServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,21 +41,25 @@ public class ChangeUserInfoServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doPost(request, response);
+		DB db=new DB();
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
 		int pid=this.user.getId();
-		String pw=this.user.getPassword();
-		if(!(email==null)||!(name==null)){
-			UserBean bean = new UserBean();
-			if(bean.login(pid)){
-				bean.updatemessage(email, name,pid);
-				HttpSession session = request.getSession();
-				session.setAttribute("userid", bean.getId());
-				String info = URLEncoder.encode("修改成功", "utf-8");
-				response.sendRedirect(request.getContextPath() + "/index/?alert="+info);	
+		
+		UserBean bean = new UserBean();
+
+		if(bean.login(pid)){
+			HttpSession session = request.getSession();
+			session.setAttribute("userid", bean.getId());
+			if(bean.updatemessage(email, name,pid)){
+				String info = URLEncoder.encode("修改成功！", "utf-8");
+				response.sendRedirect(request.getContextPath() + "/index/?alert="+info);
+			}else{
+				String info = URLEncoder.encode("该邮箱或用户名已被他人占用，请重新输入...", "utf-8");
+				response.sendRedirect(request.getContextPath() + "/user/change/?alert="+info);
+
 			}
 		}
-		
 	}
 
 }
