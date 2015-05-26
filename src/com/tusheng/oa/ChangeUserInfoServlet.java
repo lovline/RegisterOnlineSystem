@@ -45,9 +45,9 @@ public class ChangeUserInfoServlet extends BaseServlet {
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
 		int pid=this.user.getId();
-		String pw=this.user.getPassword();
 		
 		UserBean bean = new UserBean();
+
 		if(bean.login(pid)){
 			HttpSession session = request.getSession();
 			session.setAttribute("userid", bean.getId());
@@ -57,10 +57,9 @@ public class ChangeUserInfoServlet extends BaseServlet {
 			}else{
 				String info = URLEncoder.encode("该邮箱或用户名已被他人占用，请重新输入...", "utf-8");
 				response.sendRedirect(request.getContextPath() + "/user/change/?alert="+info);
+
 			}
 		}
-		
-		
 	}
 
 }
