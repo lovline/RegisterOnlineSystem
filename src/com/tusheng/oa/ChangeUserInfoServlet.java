@@ -32,7 +32,7 @@ public class ChangeUserInfoServlet extends BaseServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			 throws ServletException, IOException {
 		super.doGet(request, response);
 		request.getRequestDispatcher("/changeuser.jsp").forward(request, response);
 	}
@@ -45,37 +45,32 @@ public class ChangeUserInfoServlet extends BaseServlet {
 		super.doPost(request, response);
 		DB db=new DB();
 		String email = request.getParameter("email");
-//		String name = Helper.toUTF8(request.getParameter("name"));
 		String name = request.getParameter("name");
-		
 		int pid=this.user.getId();
-		
 		UserBean bean = new UserBean();
-		
 		if(bean.login(pid)){
+			String originEmail=bean.getEmail();
 			HttpSession session = request.getSession();
 			session.setAttribute("userid", bean.getId());
-			String originEmail=bean.getEmail();
-			String originName=bean.getRealname();
+			String originName=Helper.toUTF8(bean.getRealname());
+			System.out.println(name+" | "+originName);
 			if(email.equals(originEmail) && name.equals(originName)){
 				String info=URLEncoder.encode("与原邮箱、用户名一致，无需修改！","utf-8");
 				response.sendRedirect(request.getContextPath()+"/user/change/?a"
 						+ "lert="+info);
 			}else{
-					if(bean.updateUserMessage(email, name,pid)){
-						String info = URLEncoder.encode("修改成功！", "utf-8");
-						response.sendRedirect(request.getContextPath() + "/index"
-								+ "/?alert="+info);
-					}else{
-						String info = URLEncoder.encode("该邮箱或用户名已被他人占用，请重新"
-								+ "输入...", "utf-8");
-						response.sendRedirect(request.getContextPath() + "/user/"
-								+ "change/?alert="+info);
-					}
+				if(bean.updateUserMessage(email, name,pid)){
+					String info = URLEncoder.encode("修改成功！", "utf-8");
+					response.sendRedirect(request.getContextPath() + "/index"
+							+ "/?alert="+info);
+				}else{
+					String info = URLEncoder.encode("该邮箱或用户名已被他人占用，请重新"
+							+ "输入...", "utf-8");
+					response.sendRedirect(request.getContextPath() + "/user/"
+							+ "change/?alert="+info);
+				}
 			}
 		}
-		
-		
 	}
 
 }
