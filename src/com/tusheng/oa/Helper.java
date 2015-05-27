@@ -22,5 +22,5 @@ public class Helper {
 		String str = format.format(d);
 		return str;
 	}
-
+	
 }

@@ -35,7 +35,7 @@
 		    <th scope="col">email</th>
 			<th scope="col">真实姓名</th>
 		</tr>
-		<c:forEach items="${user3}" var="user2" >
+		<c:forEach items="${user3}" var="user2" varStatus="list" >
 			<tr class="active" align="center">
 				<td><input type="checkbox" name="checked" value="${ user2.id }"></td>
 				<td>${list.index+1}</td>
@@ -57,7 +57,7 @@
 			<th scope="col">email</th>
 			<th scope="col">真实姓名</th>
 		</tr>
-		<c:forEach items="${user4}" var="user5" >
+		<c:forEach items="${user4}" var="user5" varStatus="list" >
 			<tr class="active" align="center">
 				<td><input type="checkbox" name="checked" value="${ user5.id }"></td>
 				<td>${list.index+1}</td>
@@ -70,6 +70,8 @@
 		</tr>
 	</form>
 </table>
+
+<c:if test="${ userBean.superAdmin }" >
 <table class="table table-bordered">
 	<form action="" method="post">
 	<input type="hidden" name="type" value="beadmin" />
@@ -78,23 +80,21 @@
 			<th scope="col">编号</th>
 			<th scope="col">email</th>
 			<th scope="col">真实姓名</th>
-		    <th scope="col">管理员</th>
 		</tr>
-		<c:forEach items="${admin1}" var="admin2" >
+		<c:forEach items="${admin1}" var="admin2" varStatus="list">
 			<tr class="active" align="center">
 				<td><input type="checkbox" name="checked" value="${ admin2.id }"></td>
 				<td>${list.index+1}</td>
 				<td>${admin2.email}</td>
 				<td>${admin2.realname}</td>
-			    <td>${admin2.status}</td>
 			</tr>
 		</c:forEach>
 		<tr class="active" align="center">
-			<td colspan="5"><input type="submit" value="成为管理员" /></td>
+			<td colspan="4"><input type="submit" value="成为管理员" /></td>
 		</tr>
 	</form>
 </table>
-<c:if test="${ userBean.superAdmin }" >
+
 <table class="table table-bordered">
 	<form action="" method="post">
 	<input type="hidden" name="type" value="notbeadmin" />
@@ -103,19 +103,17 @@
 			<th scope="col">编号</th>
 			<th scope="col">email</th>
 			<th scope="col">真实姓名</th>
-		    <th scope="col">管理员</th>
 		</tr>
-		<c:forEach items="${admin3}" var="admin2" >
+		<c:forEach items="${admin3}" var="admin2" varStatus="list">
 			<tr class="active" align="center">
 				<td><input type="checkbox" name="checked" value="${ admin2.id }"></td>
 				<td>${list.index+1}</td>
 				<td>${admin2.email}</td>
 				<td>${admin2.realname}</td>
-			    <td>${admin2.status}</td>
 			</tr>
 		</c:forEach>
 		<tr class="active" align="center">
-			<td colspan="5"><input type="submit" value="取消管理员" /></td>
+			<td colspan="4"><input type="submit" value="取消管理员" /></td>
 		</tr>
 	</form>
 </table>
