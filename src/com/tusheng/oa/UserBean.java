@@ -14,6 +14,7 @@ import java.util.Date;
 public class UserBean {
 	private static final int NORMAL = 0;
 	private static final int ADMIN = 1;
+	private static final int SUPER_ADMIN = 2;
 	private int id;
 	private String email;
 	private String password;
@@ -22,7 +23,145 @@ public class UserBean {
 	private String realname;
 	private Date last_login_at;
 	private Date created_at;
-	private boolean admin = false;
+
+	private boolean admin=false;
+	private boolean superAdmin=false;
+	public static ArrayList<UserBean> admin(){
+		DB na=new DB();
+		String sql="select * from user where status=0";
+		ResultSet ss=na.select(sql);
+		ArrayList<UserBean> user = new ArrayList<UserBean>();
+		try {
+			while(ss.next()){
+				UserBean user1= new UserBean();
+				user1.id = ss.getInt("id");
+				user1.email=ss.getString("email");
+				user1.realname=ss.getString("realname");
+				user1.status=ss.getInt("status");
+				user.add(user1);
+			}
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		na.close();
+		return user;
+		
+	}
+	public static ArrayList<UserBean> notAdmin(){
+		DB na=new DB();
+		String sql="select * from user where status=1";
+		ResultSet ss=na.select(sql);
+		ArrayList<UserBean> user = new ArrayList<UserBean>();
+		try {
+			while(ss.next()){
+				UserBean user1= new UserBean();
+				user1.id = ss.getInt("id");
+				user1.email=ss.getString("email");
+				user1.realname=ss.getString("realname");
+				user1.status=ss.getInt("status");
+				user.add(user1);
+			}
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		na.close();
+		return user;
+		
+	}
+	public void toBeAdmin(String[] usermanid){
+		DB db=new DB();
+		String ids = "";
+		for(int i=0; i<usermanid.length; i++){
+			ids += usermanid[i] + ",";
+		}
+		ids = ids.substring(0, ids.length()-1);
+		String sql="update user set status=1 where id in ("+ids+"); ";
+		db.update(sql);
+		db.close();
+	}
+	public void cancelAdmin(String[] usermanid){
+		DB db=new DB();
+		String ids = "";
+		for(int i=0; i<usermanid.length; i++){
+			ids += usermanid[i] + ",";
+		}
+		ids = ids.substring(0, ids.length()-1);
+		String sql="update user set status=0 where id in ("+ids+"); ";
+		db.update(sql);
+		db.close();
+	}
+	public static ArrayList<UserBean> manageruser(){
+		DB na=new DB();
+		String sql="select * from user where is_active=1";
+		ResultSet ss=na.select(sql);
+		ArrayList<UserBean> user = new ArrayList<UserBean>();
+		try {
+			while(ss.next()){
+				UserBean user1= new UserBean();
+				user1.id = ss.getInt("id");
+				user1.email=ss.getString("email");
+				user1.realname=ss.getString("realname");
+				user.add(user1);
+			}
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		na.close();
+		return user;
+		
+	}
+	public void deleteuser(String[] usermanid){
+		DB db=new DB();
+		String ids = "";
+		for(int i=0; i<usermanid.length; i++){
+			ids += usermanid[i] + ",";
+		}
+		ids = ids.substring(0, ids.length()-1);
+		String sql="update user set is_active=0 where id in ("+ids+"); ";
+		db.update(sql);
+		db.close();
+	}
+	public static ArrayList<UserBean> renewuser(){
+		DB na=new DB();
+		String sql="select * from user where is_active=0";
+		ResultSet ss=na.select(sql);
+		ArrayList<UserBean> user = new ArrayList<UserBean>();
+		try {
+			while(ss.next()){
+				UserBean user1= new UserBean();
+				user1.id = ss.getInt("id");
+				user1.email=ss.getString("email");
+				user1.realname=ss.getString("realname");
+				user1.status=ss.getInt("status");
+				user.add(user1);
+			}
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		na.close();
+		return user;
+		
+	}
+	public void renewuser(String[] reusermanid){
+		DB db=new DB();
+		String ids = "";
+		for(int i=0; i<reusermanid.length; i++){
+			ids += reusermanid[i] + ",";
+		}
+		ids = ids.substring(0, ids.length()-1);
+		String sql="update user set is_active=1 where id in ("+ids+"); ";
+		db.update(sql);
+		db.close();
+	}
+	
 
 	public void password(String password, int id) {
 		DB db = new DB();
@@ -34,16 +173,30 @@ public class UserBean {
 		db.close();
 	}
 
+	public boolean updatemessage(String email,String realname,int pid){
 
-	public void updatemessage(String email,String realname,int pid){
 		DB db = new DB();
-		
 		String sql = "update user set email=\"" + email + "\",realname=\"" + realname +
 				"\""+"where id="+pid+";";
-		db.update(sql);
-		db.close();
+		String sql1="select email from user where email=\""+email+"\" and id!="+pid+";";
+		String sql2="select realname from user where realname=\""+realname+"\" and id!="+pid+";";
+		
+		ResultSet rs1=db.select(Helper.toUTF8(sql1));
+		ResultSet rs2=db.select(Helper.toUTF8(sql2));
+		try {
+			if(rs1.next()||rs2.next()){
+				return false;
+			}else{
+				db.update(Helper.toUTF8(sql));
+				db.close();
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
-	
 
 	public void registerxx(String email, String realname, String password) {
 		DB db = new DB();
@@ -53,9 +206,11 @@ public class UserBean {
 				+ "\",is_active=true,status=0, created_at=\""
 				+ Helper.formatDate(new Date()) + "\"";
 		;
+
 		db.insert(sql);
 		db.close();
 	}
+	
 
 	public boolean login() {
 		DB db = new DB();
@@ -78,6 +233,7 @@ public class UserBean {
 				this.created_at = rs.getDate("created_at");
 				this.last_login_at = rs.getDate("last_login_at");
 				this.admin = this.status == ADMIN;
+				this.superAdmin = this.status == SUPER_ADMIN;
 
 				Date d = new Date();
 				String now = Helper.formatDate(d);
@@ -85,8 +241,7 @@ public class UserBean {
 						+ "\" where id=" + this.id;
 				db.update(s);
 				this.last_login_at = d;
-
-				db.close();
+			    db.close();
 				return true;
 			}
 			db.close();
@@ -121,6 +276,7 @@ public class UserBean {
 					this.last_login_at = new Date(stamp.getTime());
 				}
 				this.admin = this.status == ADMIN;
+				this.superAdmin = this.status == SUPER_ADMIN;
 				db.close();
 				return true;
 			}
@@ -258,6 +414,12 @@ public class UserBean {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return this.getRealname() + "(" + this.getId() + ")";
+	}
+	public boolean isSuperAdmin() {
+		return superAdmin;
+	}
+	public void setSuperAdmin(boolean superAdmin) {
+		this.superAdmin = superAdmin;
 	}
 
 }

@@ -63,8 +63,10 @@ public class leaveupworkServlet extends BaseServlet {
 			response.sendRedirect(request.getContextPath() + "/leaveupwork/");
 		}else if(kqId.equals("2")){
 			response.sendRedirect(request.getContextPath() + "/leavedowwork/");
+		}else if(kqId.equals("3")){
+			response.sendRedirect(request.getContextPath() + "/leave/");
 		}else if(kqId.equals("")){
-		response.sendRedirect(request.getContextPath() + "/leave/");
+		response.sendRedirect(request.getContextPath() + "/leaveupwork/");
 		}
 	}
 

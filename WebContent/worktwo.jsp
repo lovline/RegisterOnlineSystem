@@ -19,7 +19,7 @@
 		<tr class="bg-primary" align="center" >
 			<b>
 				<td>编号</td>
-				<td>时间</td>
+				<td>添加时间</td>
 				<td>工作</td>
 				<td>操作</td>
 			</b>
@@ -43,7 +43,7 @@
 					</tr>
 				</form>
 			</c:if>
-			<c:if test="${ch.assignee_id!=0&&ch.status!=4}">
+			<c:if test="${ch.assignee_id!=0&&ch.status==4}">
 			<tr class="bg-success" align="center" >
 						<td width="50">${list.index+1}</td>
 						<td width="200">${ch.deadline}</td>

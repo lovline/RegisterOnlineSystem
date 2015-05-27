@@ -75,9 +75,9 @@ public class ChangePasswordServlet extends BaseServlet {
 
 		} else {
 
-			String info = URLEncoder.encode("³õÊ¼ÃÜÂë´íÎó£¬Çë×¢²á", "utf-8");
+			String info = URLEncoder.encode("³õÊ¼ÃÜÂë´íÎó£¬ÇëÖØĞÂÊäÈë£¡", "utf-8");
 			response.sendRedirect(request.getContextPath()
-					+ "/register/?alert=" + info);
+					+ "/password/change/?alert=" + info);
 		}
 	}
 

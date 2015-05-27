@@ -8,6 +8,8 @@ $(function(){
 	$("#submit").click(function(){
 		var email = $("#email").val();
 		var name = $("#name").val();
+		//var servletemail= ${ userBean.email };
+		//var servletname= ${ userBean.realname };
 		if (email.trim() == ""){
 			alert("Email不能为空");
 			$("#email").focus();
@@ -17,12 +19,17 @@ $(function(){
 			alert("姓名不能为空");
 			$("#name").focus();
 			return false;
+		//}else if((email.trim()== servletemail)&(name.trim()== servletname)){
+		//	alert("邮箱和用户名与原来一样，无需更改！");
+		//	$("#email").focus();
+		///	return false;
 		}
 		return true;
 	});
 });
 
 </script>
+
 
 <h1>修改用户信息</h1>
 

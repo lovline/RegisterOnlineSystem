@@ -16,7 +16,7 @@
 	<table width="600" class="table table-bordered">
 		<tr class="bg-primary" align="center">
 			<b>
-				<td>时间</td>
+				<td>员工提交时间</td>
 				<td>员工</td>
 				<td>工作</td>
 				<td>操作</td>

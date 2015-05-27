@@ -60,11 +60,12 @@ public class leaveervlet extends BaseServlet {
 		// TODO Auto-generated method stub
 		//1.
 		String kqId = request.getParameter("kqId");
-		System.out.println(kqId);
 		if(kqId.equals("1")){
 			response.sendRedirect(request.getContextPath() + "/leaveupwork/");
 		}else if(kqId.equals("2")){
 			response.sendRedirect(request.getContextPath() + "/leavedowwork/");
+		}else if(kqId.equals("3")){
+			response.sendRedirect(request.getContextPath() + "/leave/");
 		}else if(kqId.equals("")){
 		response.sendRedirect(request.getContextPath() + "/leave/");
 		}	

@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Check {
 
@@ -16,6 +17,7 @@ public class Check {
 	private int type;
 	private String name;
 	private Date times;
+	private int counts;
 
 	public boolean check(int type, int pid) {
 		// ResultSet rs =
@@ -33,14 +35,27 @@ public class Check {
 		return true;
 	}
 	//删除
-	public boolean deletcheck(int kqpe) {
+	public boolean deletcheck(String[] type1) {
 		// ResultSet rs =
+		String ids="";
+		for (int i = 0; i < type1.length; i++) {
+			ids += type1[i] + ",";
+		}
+		ids=ids.substring(0,ids.length()-1);
+		System.out.println(ids);
 		DB db = new DB();
-		String sq = "delete from attendance where id="+kqpe;
+		String sq = "delete from attendance where id in ("+ids+")";
 		db.update(sq);
 		db.close();
 		return true;
 	}
+	
+	//分页
+	
+	
+	//__________________________________//
+	
+	
 	//管理查询
 	public String nameselec(int u) {
 		DB db = new DB();
@@ -76,9 +91,8 @@ public class Check {
 		db.close();
 		return relist;
 	}
-
+	//用户签到信息查询
 	public ArrayList<Check> chek(int pid) {
-		System.out.println(pid);
 		DB db = new DB();
 		String sql = "select * from attendance where user_id="+pid;
 		ResultSet rs = db.select(sql);
@@ -240,5 +254,7 @@ public class Check {
 	public void setUserid(UserBean userid) {
 		this.userid = userid;
 	}
-
+	public void setCounts(int counts) {
+		this.counts = counts;
+	}
 }

@@ -44,7 +44,7 @@ public class CheckOneServlet extends BaseServlet {
 			response.sendRedirect(request.getContextPath() + "/login/");
 			return;
 		}
-		response.setCharacterEncoding("UTF-8");
+//		response.setCharacterEncoding("UTF-8");
 
 		Checko co = new Checko();
 		ArrayList<Checko> cc = co.ckuser();
@@ -60,12 +60,12 @@ public class CheckOneServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+//		request.setCharacterEncoding("UTF-8");
+		super.doPost(request, response);
 		String detail = request.getParameter("tet");
 		Checko co = new Checko();
 		int gl=this.user.getId();
 		co.check(detail,gl);
-		System.out.println(gl);
 
 		response.sendRedirect(request.getContextPath() + "/worktwo/");
 	}
