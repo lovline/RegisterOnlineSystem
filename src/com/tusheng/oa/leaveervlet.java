@@ -28,7 +28,7 @@ public class leaveervlet extends BaseServlet {
 	 */
 	public leaveervlet() {
 		super();
-        this.setTitle("¿¼ÇÚ¹ÜÀí");
+        this.setTitle("è¯·å‡");
 		// TODO Auto-generated constructor stub
 	}
 

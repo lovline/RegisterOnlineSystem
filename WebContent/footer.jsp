@@ -4,9 +4,9 @@
 	<div class="col-md-2"></div>
 </div>
 
-<div class="row" style="margin-top:150px">
+<div class="row" style="margin-top:100px">
 	<div class="col-md-12 text-center">
-		版权所有2015 <a href="http://www.tushengnet.cn">途胜科技</a>
+		版权所有2015 <a href="http://www.tushengnet.cn">tusheng technology</a>
 		<br/>
 		<br/>
 		<img style="width:120px" src="${pageContext.request.contextPath}/images/logo.png"></img>

@@ -200,17 +200,30 @@ public class UserBean {
 		}
 	}
 
-	public void registerxx(String email, String realname, String password) {
+	public boolean registerxx(String email, String realname, String password) {
+		boolean flag = false;
 		DB db = new DB();
-
-		String sql = "insert into user set email=\"" + email + "\",realname=\""
-				+ realname + "\", password=\"" + password
-				+ "\",is_active=true,status=0, created_at=\""
-				+ Helper.formatDate(new Date()) + "\"";
-		;
-
-		db.insert(sql);
-		db.close();
+		
+		ResultSet rs = db.select("select id from user where email=\"" + email + "\"");
+		try {
+			if(!rs.next()){
+				flag = true;
+				String sql = "insert into user set email=\"" + email + "\",realname=\""
+						+ realname + "\", password=\"" + password
+						+ "\",is_active=true,status=0, created_at=\""
+						+ Helper.formatDate(new Date()) + "\"";
+				
+				db.insert(sql);
+				db.close();
+			}
+			else{
+				return flag;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flag;
 	}
 	
 
@@ -389,7 +402,7 @@ public class UserBean {
 		return list;
 	}
 
-	// ¿¼ÇÚ
+	// ï¿½ï¿½ï¿½ï¿½
 	public static ArrayList<UserBean> get_kqemployees(int pid) {
 		// TODO Auto-generated method stub
 		DB db = new DB();

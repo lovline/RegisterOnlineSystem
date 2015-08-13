@@ -9,7 +9,7 @@
 		  <div class="panel-body">
 		    <table class="table">
 		    	<tr>
-		    		<td>Email</td>
+		    		<td>邮箱</td>
 		    		<td>真实姓名</td>
 		    		<td>是否管理员</td>
 		    		<td>上次登录时间</td>

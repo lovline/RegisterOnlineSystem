@@ -1,8 +1,8 @@
 package com.tusheng.oa;
 
 public class Constant {
-	final static String SITE_NAME = "途晟科技在线办公系统";
-	final static String HOMEPAGE = "主页";
-	final static String LOGIN = "登录";
-	final static String REGISTER = "注册";
+	final static String SITE_NAME = "閫旀櫉绉戞妧鍦ㄧ嚎鍔炲叕绯荤粺";
+	final static String HOMEPAGE = "涓婚〉";
+	final static String LOGIN = "鐧诲綍";
+	final static String REGISTER = "娉ㄥ唽";
 }

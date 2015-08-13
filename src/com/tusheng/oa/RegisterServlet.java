@@ -24,7 +24,7 @@ public class RegisterServlet extends BaseServlet {
      */
     public RegisterServlet() {
         super();
-        this.setTitle("×¢²á");
+        this.setTitle("é€”æ™Ÿç§‘æŠ€åœ¨çº¿æ³¨å†Œ");
     }
 
 	/**
@@ -48,10 +48,19 @@ public class RegisterServlet extends BaseServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		UserBean userBean=new UserBean();
-		userBean.registerxx(email, realname, password);
-		String info = URLEncoder.encode("×¢²á³É¹¦£¬ÇëµÇÂ¼", "utf-8");
-		String url = request.getContextPath() + "/login/?alert=" + info;
-		response.sendRedirect(url);
+		boolean flag = userBean.registerxx(email, realname, password);
+		if(flag){
+			String info = URLEncoder.encode("Register success , Please Login", "utf-8");
+			String url = request.getContextPath() + "/login/?alert=" + info;
+			response.sendRedirect(url);
+			return ;
+		}
+		else{
+			String info = URLEncoder.encode("Email has been registered , Please register again", "utf-8");
+			String url = request.getContextPath() + "/register/?alert=" + info;
+			response.sendRedirect(url);
+			return ;
+		}
 
 	}
 		

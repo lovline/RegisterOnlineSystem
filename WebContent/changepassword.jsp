@@ -18,18 +18,39 @@
 			}
 		}
 	</script>
-	</script>
-	<h1>密码修改</h1>
-	<form action=" " name="form1" method="post"
-		onsubmit="return CheckForm();">
-		初始密码:<input type="password" name="pwd" /><br />
-		</p>
-		密 &nbsp; &nbsp; 码 :<input type="password" id="pwd1" name="pwd1" /><br />
-		</p>
-		确认密码:<input type="password" name="pwd2" id="pwd2" /><br />
-		</p>
-		<input type="submit" class="btn btn-primary btn-lg" value="确认" /> <input
-			type="reset" class="btn btn-primary btn-lg" value="重置" /><br>
+
+	<h2>密码修改</h2>
+	<div class='col-md-8'>
+	<form class="form-horizontal" action=" " name="form1" method="post"
+		onsubmit="return CheckForm();" style="margin-top: 20px">
+
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-2 control-label">新密码</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="pwd" name="pwd"
+					placeholder="password">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-2 control-label">新密码</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="pwd1" name="pwd1"
+					placeholder="password">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="pwd2" name="pwd2"
+					placeholder="password">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">confirm</button>
+				<button type="reset" class="btn btn-default">reset</button>
+			</div>
+		</div>
 
 	</form>
 	</div>

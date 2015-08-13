@@ -1,4 +1,4 @@
--- ÓÃ»§
+-- ç”¨æˆ·
 create table if not exists user (id int auto_increment, 
 				   email varchar(100),
 				   password varchar(100),
@@ -6,55 +6,55 @@ create table if not exists user (id int auto_increment,
 				   created_at datetime,
 				   last_login_at datetime,
 				   is_active tinyint,
-				   status tinyint,  /*¹ÜÀíÔ±£¬ÆÕÍ¨ÓÃ»§*/
+				   status tinyint,  /*ç®¡ç†å‘˜ï¼Œæ™®é€šç”¨æˆ·*/
 				   primary key(id), index(email), index(is_active), index(status)
 );
 
--- ¿¼ÇÚ
+-- è€ƒå‹¤
 create table if not exists attendance (id int auto_increment,
 					   user_id int,
 					   checkin_time datetime,
-					   type tinyint, /*ÉÏ°à£¬ÏÂ°à*/
+					   type tinyint, /*ä¸Šç­ï¼Œä¸‹ç­*/
 					   primary key(id), 
 					   index(type),
 					   constraint attendance_userid foreign key(user_id) references user(id)
 );
 
--- Çë¼Ù
+-- è¯·å‡
 create table if not exists absence (id int auto_increment,
 				   user_id int,
 				   start_time datetime,
 				   end_time datetime,
-				   status tinyint, /*´ıÅú×¼£¬Åú×¼£¬¾Ü¾ø*/
+				   status tinyint, /*å¾…æ‰¹å‡†ï¼Œæ‰¹å‡†ï¼Œæ‹’ç»*/
 				   created_at datetime,
 				   primary key(id), 
 				   index(status),
 				   constraint leave_userid foreign key(user_id) references user(id) 
 );
--- ¼ÇÊÂ±¾
+-- è®°äº‹æœ¬
 create table if not exists note (id int auto_increment,
 				   user_id int,
 				   subject varchar(200),
 				   content text,
-				   is_public tinyint, /* 0: ²»¹«¿ª 1:¹«¿ª */
+				   is_public tinyint, /* 0: ä¸å…¬å¼€ 1:å…¬å¼€ */
 				   created_at datetime,
 				   updated_at datetime,
-				   status tinyint, /* 0: Õı³££¬ 1£ºÉ¾³ı */
+				   status tinyint, /* 0: æ­£å¸¸ï¼Œ 1ï¼šåˆ é™¤ */
 				   primary key(id), 
 				   index(status),
 				   constraint note_userid foreign key(user_id) references user(id) 
 );
--- ¹¤×÷°²ÅÅ
+-- å·¥ä½œå®‰æ’
 create table if not exists work (id int auto_increment,
-				   assigner_id int,  /* ¹¤×÷·ÖÅäÈË£¬±ØĞëÊÇadmin */
-				   assignee_id int,  /* ¹¤×÷½ÓÊÜÈË */
+				   assigner_id int,  /* å·¥ä½œåˆ†é…äººï¼Œå¿…é¡»æ˜¯admin */
+				   assignee_id int,  /* å·¥ä½œæ¥å—äºº */
 				   subject varchar(200),
 				   detail text,
 				   deadline datetime,
 				   created_at datetime,
 				   updated_at datetime,
 				   finish_at datetime,
-				   status tinyint, /* 0: Õı³££¬ 1£ºÒÑ¾­½ÓÊÜ 2: ¾Ü¾ø 3£ºÍê³É´ıÑéÊÕ 4£º¹Ø±Õ */
+				   status tinyint, /* 0: æ­£å¸¸ï¼Œ 1ï¼šå·²ç»æ¥å— 2: æ‹’ç» 3ï¼šå®Œæˆå¾…éªŒæ”¶ 4ï¼šå…³é—­ */
 				   primary key(id), 
 				   index(status),
 				   constraint work_assigner_id foreign key(assigner_id) references user(id), 

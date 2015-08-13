@@ -25,7 +25,7 @@ public class LoginServlet extends BaseServlet {
      */
     public LoginServlet() {
         super();
-        this.setTitle("µÇÂ¼");
+        this.setTitle("ç™»é™†é¡µé¢");
     }
 
 	/**
@@ -59,11 +59,11 @@ public class LoginServlet extends BaseServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("is_logged", true);
 			session.setAttribute("userid", bean.getId());
-			String info = URLEncoder.encode("µÇÂ¼³É¹¦", "utf-8");
+			String info = URLEncoder.encode("Login Success", "utf-8");
 			response.sendRedirect(request.getContextPath() + "/index/?alert="+info);
 		}
 		else{
-			String info = URLEncoder.encode("µÇÂ¼Ê§°Ü£¬Çë×¢²á", "utf-8");
+			String info = URLEncoder.encode("Login Error", "utf-8");
 			response.sendRedirect(request.getContextPath() + "/register/?alert="+info);
 		}
 

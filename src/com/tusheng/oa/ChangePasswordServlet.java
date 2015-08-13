@@ -45,7 +45,7 @@ public class ChangePasswordServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		super.doPost(request, response);
 		if (!this.isLogged) {
-			String info = URLEncoder.encode("ÇëÏÈµÇÂ¼", "utf-8");
+			String info = URLEncoder.encode("å¿…é¡»ç™»å½•æ‰èƒ½æ‰§è¡Œ", "utf-8");
 			String url = request.getContextPath() + "/login/?alert=" + info;
 			response.sendRedirect(url);
 			return;
@@ -67,7 +67,7 @@ public class ChangePasswordServlet extends BaseServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("is_logged", true);
 				session.setAttribute("userid", bean.getId());
-				String info = URLEncoder.encode("ĞŞ¸Ä³É¹¦£¬ÇëµÇÂ¼", "utf-8");
+				String info = URLEncoder.encode("ä¿®æ”¹å¯†ç æˆåŠŸï¼Œè¯·é‡æ–°ç™»é™†", "utf-8");
 				String url = request.getContextPath() + "/login/?alert=" + info;
 				response.sendRedirect(url);
 
@@ -75,7 +75,7 @@ public class ChangePasswordServlet extends BaseServlet {
 
 		} else {
 
-			String info = URLEncoder.encode("³õÊ¼ÃÜÂë´íÎó£¬ÇëÖØĞÂÊäÈë£¡", "utf-8");
+			String info = URLEncoder.encode("å½“å‰ç”¨æˆ·åå¯†ç é”™è¯¯", "utf-8");
 			response.sendRedirect(request.getContextPath()
 					+ "/password/change/?alert=" + info);
 		}

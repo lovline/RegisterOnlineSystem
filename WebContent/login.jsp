@@ -13,9 +13,9 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="password" class="col-sm-2 control-label">密码</label>
+    <label for="password" class="col-sm-2 control-label">Password</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+      <input type="password" class="form-control" id="password" name="password" placeholder="password">
     </div>
   </div>
   <div class="form-group">
@@ -34,14 +34,16 @@
   </div>
 </form>
 </div>
-<div class="col-md-4" style="border-left:1px solid black">
-	<h4>完成登录后</h4>
-	<ul>
+<div class="col-md-4" style="border-right:1px solid black">
+	<div style="margin-left: 80px">
+		<h4>完成登陆后</h4>
+		<ul>
 		<li>考勤</li>
 		<li>查看公司公告</li>
 		<li>其他</li>
-		<li>我没有账号，<a href="${pageContext.request.contextPath}/register/">我要注册</a></li>
-	</ul>
+		<li><a href="${pageContext.request.contextPath}/login/">我要注册</a></li>
+		</ul>
+	</div>
 </div>
 </div>
 <%@ include file="footer.jsp" %>

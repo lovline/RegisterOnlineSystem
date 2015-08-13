@@ -32,26 +32,26 @@ $(function(){
 </script>
 
 
-<h1>修改用户信息</h1>
+<h2>修改用户信息</h2>
 
 
-<div class='col-md-8'>
+<div class='col-md-8' style="margin-top: 20px">
 <form class="form-horizontal" method="post">
   <div class="form-group">
-    <label for="email" class="col-sm-2 control-label">修改邮箱</label>
-    <div class="col-sm-10">
+    <label for="email" class="col-sm-4 control-label">update email</label>
+    <div class="col-sm-8">
       <input type="email" class="form-control" id="email" name="email" placeholder="Email" value=${ userBean.email }>
     </div>
   </div>
   <div class="form-group">
-    <label for="text" class="col-sm-2 control-label">修改用户名</label>
-    <div class="col-sm-10">
+    <label for="text" class="col-sm-4 control-label">update username</label>
+    <div class="col-sm-8">
       <input type="text" class="form-control" id="name" name="name" placeholder="Name" value=${ userBean.realname }>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" id="submit" class="btn btn-primary btn-lg">确定</button>
+      <button type="submit" id="submit" class="btn btn-primary btn-lg">confirm</button>
     </div>
   </div>
 </form>
