@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class DB {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_URL = "jdbc:mysql://localhost/syst";
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/student";
 	private static final String DB_USER = "root";
 	private static final String DB_PASS = "lovline";
 	private Connection conn;

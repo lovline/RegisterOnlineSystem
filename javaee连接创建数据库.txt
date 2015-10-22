@@ -1,0 +1,11 @@
+JavaEE版本的Eclipse连接MySQL数据库
+http://blog.csdn.net/liyong199012/article/details/8054010
+1首先，找到Date Source Explorer下的Database Connection，
+	新建（右键new），单击next，进入下一步。
+2选择MySQL，下一步next，如图
+3输入数据库的名称，我的是student，还有路径url（jdbc:mysql://localhost:3306/student），
+	数据库默认路径设置在上一篇有提及，不多说了。
+	输入用户名和密码后点击Test Connection就可以测试数据库连接是否成功。
+	恭喜你，到这里，数据库连接就成功了。
+4直接Execute SQL files，第一个选择Datebase server type就是默认刚才ping succeeded的成功的，
+	然后选择刚才的new mysql和数据库student，然后运行就成功了。

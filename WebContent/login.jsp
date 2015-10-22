@@ -7,7 +7,7 @@
 <div class='col-md-8'>
 <form class="form-horizontal" method="post">
   <div class="form-group">
-    <label for="email" class="col-sm-2 control-label">Email</label>
+    <label for="email" class="col-sm-2 control-label">Realname</label>
     <div class="col-sm-10">
       <input type="email" class="form-control" id="email" name="email" placeholder="Email">
     </div>
